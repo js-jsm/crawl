@@ -10,5 +10,5 @@ client.fetch(url, param, (err, $) => {
     const text = $(this).text();
     const href = $(this).attr('href');
     console.log(`${text}: ${href}`);
-  })
+  });
 });
