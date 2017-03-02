@@ -1,0 +1,1304 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Crypto Node.js v0.10.26 Manual & Documentation</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/sh.css">
+  <link rel="canonical" href="http://nodejs.org/api/crypto.html">
+</head>
+<body class="alt apidoc" id="api-section-crypto">
+    <div id="intro" class="interior">
+        <a href="/" title="Go back to the home page">
+            <img id="logo" src="http://nodejs.org/images/logo-light.png" alt="node.js">
+        </a>
+    </div>
+    <div id="content" class="clearfix">
+        <div id="column2" class="interior">
+            <ul>
+                <!--
+                <li><a href="/" class="home">Home</a></li>
+                <li><a href="/download/" class="download">Download</a></li>
+                <li><a href="/about/" class="about">About</a></li>
+                <li><a href="http://npmjs.org/" class="npm">npm Registry</a></li>
+                <li><a href="http://nodejs.org/api/" class="docs current">Docs</a></li>
+                <li><a href="http://blog.nodejs.org" class="blog">Blog</a></li>
+                <li><a href="/community/" class="community">Community</a></li>
+                <li><a href="/logos/" class="logos">Logos</a></li>
+                -->
+               <li><a href="../" class="home">ホーム</a></li>
+               <li><a href="../#download" class="download">ダウンロード</a></li>
+               <li><a href="../about/" class="about">概要</a></li>
+               <li><a href="http://npmjs.org/" class="npm">npm レジストリ</a></li>
+               <li><a href="../api/" class="docs current">ドキュメント</a></li>
+               <li><a href="http://blog.nodejs.org" class="blog">ブログ</a></li>
+               <li><a href="../community/" class="community">コミュニティ</a></li>
+               <li><a href="../logos/" class="logos">ロゴ</a></li>
+                <li><a href="http://jobs.nodejs.org/" class="jobs">Jobs</a></li>
+            </ul>
+            <p class="twitter"><a href="http://twitter.com/nodejs">@nodejs</a></p>
+        </div>
+
+        <div id="column1" class="interior">
+          <header>
+            <h1>Node.js v0.10.26 マニュアル & ドキュメンテーション</h1>
+            <div id="gtoc">
+              <p>
+                <a href="index.html" name="toc">Index</a> |
+                <a href="all.html">View on single page</a> |
+                <a href="crypto.json">View as JSON</a>
+              </p>
+            </div>
+            <hr>
+          </header>
+
+          <div id="toc">
+            <h2>Table of Contents</h2>
+            <ul>
+<li><a href="#crypto_crypto">Crypto</a><ul>
+<li><a href="#crypto_crypto_getciphers">crypto.getCiphers()</a></li>
+<li><a href="#crypto_crypto_gethashes">crypto.getHashes()</a></li>
+<li><a href="#crypto_crypto_createcredentials_details">crypto.createCredentials(details)</a></li>
+<li><a href="#crypto_crypto_createhash_algorithm">crypto.createHash(algorithm)</a></li>
+<li><a href="#crypto_class_hash">Class: Hash</a><ul>
+<li><a href="#crypto_hash_update_data_input_encoding">hash.update(data, [input_encoding])</a></li>
+<li><a href="#crypto_hash_digest_encoding">hash.digest([encoding])</a></li>
+</ul>
+</li>
+<li><a href="#crypto_crypto_createhmac_algorithm_key">crypto.createHmac(algorithm, key)</a></li>
+<li><a href="#crypto_class_hmac">Class: Hmac</a><ul>
+<li><a href="#crypto_hmac_update_data">hmac.update(data)</a></li>
+<li><a href="#crypto_hmac_digest_encoding">hmac.digest([encoding])</a></li>
+</ul>
+</li>
+<li><a href="#crypto_crypto_createcipher_algorithm_password">crypto.createCipher(algorithm, password)</a></li>
+<li><a href="#crypto_crypto_createcipheriv_algorithm_key_iv">crypto.createCipheriv(algorithm, key, iv)</a></li>
+<li><a href="#crypto_class_cipher">Class: Cipher</a><ul>
+<li><a href="#crypto_cipher_update_data_input_encoding_output_encoding">cipher.update(data, [input_encoding], [output_encoding])</a></li>
+<li><a href="#crypto_cipher_final_output_encoding">cipher.final([output_encoding])</a></li>
+<li><a href="#crypto_cipher_setautopadding_auto_padding_true">cipher.setAutoPadding(auto_padding=true)</a></li>
+</ul>
+</li>
+<li><a href="#crypto_crypto_createdecipher_algorithm_password">crypto.createDecipher(algorithm, password)</a></li>
+<li><a href="#crypto_crypto_createdecipheriv_algorithm_key_iv">crypto.createDecipheriv(algorithm, key, iv)</a></li>
+<li><a href="#crypto_class_decipher">Class: Decipher</a><ul>
+<li><a href="#crypto_decipher_update_data_input_encoding_output_encoding">decipher.update(data, [input_encoding], [output_encoding])</a></li>
+<li><a href="#crypto_decipher_final_output_encoding">decipher.final([output_encoding])</a></li>
+<li><a href="#crypto_decipher_setautopadding_auto_padding_true">decipher.setAutoPadding(auto_padding=true)</a></li>
+</ul>
+</li>
+<li><a href="#crypto_crypto_createsign_algorithm">crypto.createSign(algorithm)</a></li>
+<li><a href="#crypto_class_sign">Class: Sign</a><ul>
+<li><a href="#crypto_sign_update_data">sign.update(data)</a></li>
+<li><a href="#crypto_sign_sign_private_key_output_format">sign.sign(private_key, [output_format])</a></li>
+</ul>
+</li>
+<li><a href="#crypto_crypto_createverify_algorithm">crypto.createVerify(algorithm)</a></li>
+<li><a href="#crypto_class_verify">Class: Verify</a><ul>
+<li><a href="#crypto_verifier_update_data">verifier.update(data)</a></li>
+<li><a href="#crypto_verifier_verify_object_signature_signature_format">verifier.verify(object, signature, [signature_format])</a></li>
+</ul>
+</li>
+<li><a href="#crypto_crypto_creatediffiehellman_prime_length">crypto.createDiffieHellman(prime_length)</a></li>
+<li><a href="#crypto_crypto_creatediffiehellman_prime_encoding">crypto.createDiffieHellman(prime, [encoding])</a></li>
+<li><a href="#crypto_class_diffiehellman">Class: DiffieHellman</a><ul>
+<li><a href="#crypto_diffiehellman_generatekeys_encoding">diffieHellman.generateKeys([encoding])</a></li>
+<li><a href="#crypto_diffiehellman_computesecret_other_public_key_input_encoding_output_encoding">diffieHellman.computeSecret(other_public_key, [input_encoding], [output_encoding])</a></li>
+<li><a href="#crypto_diffiehellman_getprime_encoding">diffieHellman.getPrime([encoding])</a></li>
+<li><a href="#crypto_diffiehellman_getgenerator_encoding">diffieHellman.getGenerator([encoding])</a></li>
+<li><a href="#crypto_diffiehellman_getpublickey_encoding">diffieHellman.getPublicKey([encoding])</a></li>
+<li><a href="#crypto_diffiehellman_getprivatekey_encoding">diffieHellman.getPrivateKey([encoding])</a></li>
+<li><a href="#crypto_diffiehellman_setpublickey_public_key_encoding">diffieHellman.setPublicKey(public_key, [encoding])</a></li>
+<li><a href="#crypto_diffiehellman_setprivatekey_private_key_encoding">diffieHellman.setPrivateKey(private_key, [encoding])</a></li>
+</ul>
+</li>
+<li><a href="#crypto_crypto_getdiffiehellman_group_name">crypto.getDiffieHellman(group_name)</a></li>
+<li><a href="#crypto_crypto_pbkdf2_password_salt_iterations_keylen_callback">crypto.pbkdf2(password, salt, iterations, keylen, callback)</a></li>
+<li><a href="#crypto_crypto_pbkdf2sync_password_salt_iterations_keylen">crypto.pbkdf2Sync(password, salt, iterations, keylen)</a></li>
+<li><a href="#crypto_crypto_randombytes_size_callback">crypto.randomBytes(size, [callback])</a></li>
+<li><a href="#crypto_crypto_pseudorandombytes_size_callback">crypto.pseudoRandomBytes(size, [callback])</a></li>
+<li><a href="#crypto_crypto_default_encoding">crypto.DEFAULT_ENCODING</a></li>
+<li><a href="#crypto_recent_api_changes">Recent API Changes</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+
+          <div id="apicontent">
+            <h1>Crypto<span><a class="mark" href="#crypto_crypto" id="crypto_crypto">#</a></span></h1>
+<!--
+    Stability: 2 - Unstable; API changes are being discussed for
+    future versions.  Breaking changes will be minimized.  See below.
+-->
+
+<pre class="api_stability_2">Stability: 2 - Unstable; 将来のバージョンにおいて API の変更が
+議論されています。互換性を損なう変更は最小限になる予定です。
+後述します。</pre><!--
+Use `require('crypto')` to access this module.
+-->
+
+<p>このモジュールにアクセスするには <code>require('crypto')</code> を使用します。
+
+</p>
+<!--
+The crypto module offers a way of encapsulating secure credentials to be
+used as part of a secure HTTPS net or http connection.
+-->
+
+<p>暗号化モジュールは安全な HTTPS ネットワークや http
+コネクションの一部として使われる、
+安全な認証情報をカプセル化する方法を提供します。
+
+</p>
+<!--
+It also offers a set of wrappers for OpenSSL's hash, hmac, cipher,
+decipher, sign and verify methods.
+-->
+
+<p>同時に OpenSSL のハッシュ、HMAC、暗号、復号、署名、そして検証へのラッパーを一式提供します。
+
+
+</p>
+<h2>crypto.getCiphers()<span><a class="mark" href="#crypto_crypto_getciphers" id="crypto_crypto_getciphers">#</a></span></h2>
+<!--
+Returns an array with the names of the supported ciphers.
+-->
+
+<p>サポートされている暗号の名前からなる配列を返します。
+
+</p>
+<!--
+Example:
+-->
+
+<p>例:
+
+</p>
+<pre><code>var ciphers = crypto.getCiphers();
+console.log(ciphers); // ['AES-128-CBC', 'AES-128-CBC-HMAC-SHA1', ...]</code></pre>
+<h2>crypto.getHashes()<span><a class="mark" href="#crypto_crypto_gethashes" id="crypto_crypto_gethashes">#</a></span></h2>
+<!--
+Returns an array with the names of the supported hash algorithms.
+-->
+
+<p>サポートされているハッシュアルゴリズムの名前からなる配列を返します。
+
+</p>
+<!--
+Example:
+-->
+
+<pre><code>var hashes = crypto.getHashes();
+console.log(hashes); // ['sha', 'sha1', 'sha1WithRSAEncryption', ...]</code></pre>
+<h2>crypto.createCredentials(details)<span><a class="mark" href="#crypto_crypto_createcredentials_details" id="crypto_crypto_createcredentials_details">#</a></span></h2>
+<!--
+Creates a credentials object, with the optional details being a
+dictionary with keys:
+-->
+
+<p>認証情報オブジェクトを作成します。オプションの <code>details</code>
+は以下のキーを持つ辞書です:
+
+</p>
+<!--
+* `pfx` : A string or buffer holding the PFX or PKCS12 encoded private
+  key, certificate and CA certificates
+* `key` : A string holding the PEM encoded private key
+* `passphrase` : A string of passphrase for the private key or pfx
+* `cert` : A string holding the PEM encoded certificate
+* `ca` : Either a string or list of strings of PEM encoded CA
+  certificates to trust.
+* `crl` : Either a string or list of strings of PEM encoded CRLs
+  (Certificate Revocation List)
+* `ciphers`: A string describing the ciphers to use or exclude.
+  Consult
+  <http://www.openssl.org/docs/apps/ciphers.html#CIPHER_LIST_FORMAT>
+  for details on the format.
+-->
+
+<ul>
+<li><code>pfx</code> : PFX または PKCS12 でエンコードされた秘密鍵、証明書、および CA の
+証明書を含む文字列またはバッファ。</li>
+<li><code>key</code> : PEM でエンコードされた秘密鍵を保持する文字列。</li>
+<li><code>passphrase</code>: 秘密鍵または pfx のパスフレーズ。</li>
+<li><code>cert</code> : PEM でエンコードされた証明書を保持する文字列。</li>
+<li><code>ca</code> : 信頼できる認証局の証明書が PEM でエンコードされた文字列または
+文字列の配列。</li>
+<li><code>crl</code> : PEM でエンコードされた CRL (Certificate Revocation List、
+失効した証明書の一覧) の文字列または文字列の配列。</li>
+<li><code>ciphers</code>: 使用または除外する暗号を記述した文字列。
+詳細は <a href="http://www.openssl.org/docs/apps/ciphers.html#CIPHER_LIST_FORMAT">http://www.openssl.org/docs/apps/ciphers.html#CIPHER_LIST_FORMAT</a>
+を参照してください。</li>
+</ul>
+<!--
+If no 'ca' details are given, then node.js will use the default
+publicly trusted list of CAs as given in
+<http://mxr.mozilla.org/mozilla/source/security/nss/lib/ckfw/builtins/certdata.txt>.
+-->
+
+<p>'ca' の詳細が与えられなかった場合、node.js はデフォルトとして
+</p>
+<p><a href="http://mxr.mozilla.org/mozilla/source/security/nss/lib/ckfw/builtins/certdata.txt">http://mxr.mozilla.org/mozilla/source/security/nss/lib/ckfw/builtins/certdata.txt</a>
+で与えられる、信頼できる認証局の公開されたリストを使用します。
+
+
+</p>
+<h2>crypto.createHash(algorithm)<span><a class="mark" href="#crypto_crypto_createhash_algorithm" id="crypto_crypto_createhash_algorithm">#</a></span></h2>
+<!--
+Creates and returns a hash object, a cryptographic hash with the given
+algorithm which can be used to generate hash digests.
+-->
+
+<p>ハッシュオブジェクトを生成して返します。
+与えられたアルゴリズムによる暗号ハッシュ関数はダイジェストの生成に使われます。
+
+</p>
+<!--
+`algorithm` is dependent on the available algorithms supported by the
+version of OpenSSL on the platform. Examples are `'sha1'`, `'md5'`,
+`'sha256'`, `'sha512'`, etc.  On recent releases, `openssl
+list-message-digest-algorithms` will display the available digest
+algorithms.
+-->
+
+<p><code>algorithm</code> は、プラットフォーム上の OpenSSL 
+のバージョンでサポートされている利用可能なアルゴリズムに依存します。
+例えば <code>'sha1'</code>、<code>'md5'</code>、<code>'sha256'</code>、<code>'sha512'</code>、などです。
+最近のリリースでは、<code>openssl list-message-digest-algorithms</code>
+で利用可能なダイジェストアルゴリズムが表示されます。
+
+</p>
+<!--
+Example: this program that takes the sha1 sum of a file
+-->
+
+<p>例: このプログラムはファイルのsha1ハッシュ値を求めます。
+
+</p>
+<pre><code>var filename = process.argv[2];
+var crypto = require('crypto');
+var fs = require('fs');
+
+var shasum = crypto.createHash('sha1');
+
+var s = fs.ReadStream(filename);
+s.on('data', function(d) {
+  shasum.update(d);
+});
+
+s.on('end', function() {
+  var d = shasum.digest('hex');
+  console.log(d + '  ' + filename);
+});</code></pre>
+<h2>Class: Hash<span><a class="mark" href="#crypto_class_hash" id="crypto_class_hash">#</a></span></h2>
+<!--
+The class for creating hash digests of data.
+-->
+
+<p>データのハッシュダイジェストを作成するためのクラスです。
+
+</p>
+<!--
+It is a [stream](stream.html) that is both readable and writable.  The
+written data is used to compute the hash.  Once the writable side of
+the stream is ended, use the `read()` method to get the computed hash
+digest.  The legacy `update` and `digest` methods are also supported.
+-->
+
+<p>これは読み込みと書き込みの両方が可能な <a href="stream.html">ストリーム</a> です。
+書き込まれたデータはハッシュを計算するために使われます。
+一度ストリームの書き込み側が閉じられると、計算されたハッシュダイジェストを
+読み出すために <code>read()</code> メソッドを使うことができます。
+レガシーな <code>update()</code> および <code>digest()</code> メソッドもサポートされます。
+
+</p>
+<!--
+Returned by `crypto.createHash`.
+-->
+
+<p><code>crypto.createHash()</code> から返されます。
+
+</p>
+<h3>hash.update(data, [input_encoding])<span><a class="mark" href="#crypto_hash_update_data_input_encoding" id="crypto_hash_update_data_input_encoding">#</a></span></h3>
+<!--
+Updates the hash content with the given `data`, the encoding of which
+is given in `input_encoding` and can be `'utf8'`, `'ascii'` or
+`'binary'`.  If no encoding is provided and the input is a string an
+encoding of `'binary'` is enforced. If `data` is a `Buffer` then
+`input_encoding` is ignored.
+-->
+
+<p>与えられた <code>data</code> でハッシュの内容を更新します。
+そのエンコーディングは <code>input_encoding</code> で与えられ、<code>'utf8'</code>、<code>'ascii'</code>、
+または <code>'binary'</code> を指定することができます。
+<code>data</code> が文字列でエンコーディングが与えられなかった場合は、エンコーディングは
+<code>'binary'</code> が強制されます。
+もし <code>data</code> が <code>Buffer</code> なら、<code>input_encoding</code> は無視されます。
+
+</p>
+<!--
+This can be called many times with new data as it is streamed.
+-->
+
+<p>これは新しいデータがストリームに流される際に何度も呼び出されます。
+
+</p>
+<h3>hash.digest([encoding])<span><a class="mark" href="#crypto_hash_digest_encoding" id="crypto_hash_digest_encoding">#</a></span></h3>
+<!--
+Calculates the digest of all of the passed data to be hashed.  The
+`encoding` can be `'hex'`, `'binary'` or `'base64'`.  If no encoding
+is provided, then a buffer is returned.
+-->
+
+<p>渡された全てのデータがハッシュ化されたダイジェストを計算します。
+<code>encoding</code> は <code>'hex'</code>、<code>'binary'</code>、または <code>'base64'</code> のいずれかです。
+エンコーディングが与えられなかった場合はバッファが返されます。
+
+</p>
+<!--
+Note: `hash` object can not be used after `digest()` method has been
+called.
+-->
+
+<p>注意: <code>digest()</code> メソッドが呼び出された後で <code>hash</code> 
+オブジェクトを使うことはできません。
+
+
+</p>
+<h2>crypto.createHmac(algorithm, key)<span><a class="mark" href="#crypto_crypto_createhmac_algorithm_key" id="crypto_crypto_createhmac_algorithm_key">#</a></span></h2>
+<!--
+Creates and returns a hmac object, a cryptographic hmac with the given
+algorithm and key.
+-->
+
+<p>与えられたアルゴリズムとキーで HMAC を計算する、HMAC オブジェクトを作成して返します。
+
+</p>
+<!--
+It is a [stream](stream.html) that is both readable and writable.  The
+written data is used to compute the hmac.  Once the writable side of
+the stream is ended, use the `read()` method to get the computed
+digest.  The legacy `update` and `digest` methods are also supported.
+-->
+
+<p>これは読み込みと書き込みの両方が可能な <a href="stream.html">ストリーム</a> です。
+書き込まれたデータはハッシュを計算するために使われます。
+一度ストリームの書き込み側が閉じられると、計算されたハッシュダイジェストを
+読み出すために <code>read()</code> メソッドを使うことができます。
+レガシーな <code>update()</code> および <code>digest()</code> メソッドもサポートされます。
+
+</p>
+<!--
+`algorithm` is dependent on the available algorithms supported by
+OpenSSL - see createHash above.  `key` is the hmac key to be used.
+-->
+
+<p><code>algorithm</code> は OpenSSL でサポートされているアルゴリズムに依存します － 
+前述の <code>createHash</code> を参照してください。
+
+</p>
+<h2>Class: Hmac<span><a class="mark" href="#crypto_class_hmac" id="crypto_class_hmac">#</a></span></h2>
+<!--
+Class for creating cryptographic hmac content.
+
+Returned by `crypto.createHmac`.
+-->
+
+<p>hmac を作成するためのクラスです。
+
+</p>
+<p><code>crypto.createHamc</code> から返されます。
+
+</p>
+<h3>hmac.update(data)<span><a class="mark" href="#crypto_hmac_update_data" id="crypto_hmac_update_data">#</a></span></h3>
+<!--
+Update the hmac content with the given `data`.  This can be called
+many times with new data as it is streamed.
+-->
+
+<p>与えられた <code>data</code> で HMAC の内容を更新します。
+これは新しいデータがストリームに流される際に何度も呼び出されます。
+
+</p>
+<h3>hmac.digest([encoding])<span><a class="mark" href="#crypto_hmac_digest_encoding" id="crypto_hmac_digest_encoding">#</a></span></h3>
+<!--
+Calculates the digest of all of the passed data to the hmac.  The
+`encoding` can be `'hex'`, `'binary'` or `'base64'`.  If no encoding
+is provided, then a buffer is returned.
+-->
+
+<p>渡された全てのデータが HMAC 化されたダイジェストを計算します。
+<code>encoding</code> は <code>'hex'</code>、<code>'binary'</code>、または <code>'base64'</code> のいずれかです。
+エンコーディングが与えられなかった場合はバッファが返されます。
+
+</p>
+<!--
+Note: `hmac` object can not be used after `digest()` method has been
+called.
+-->
+
+<p>注意: <code>digest()</code> メソッドが呼び出された後で <code>hmac</code> 
+オブジェクトを使うことはできません。
+
+
+</p>
+<h2>crypto.createCipher(algorithm, password)<span><a class="mark" href="#crypto_crypto_createcipher_algorithm_password" id="crypto_crypto_createcipher_algorithm_password">#</a></span></h2>
+<!--
+Creates and returns a cipher object, with the given algorithm and
+password.
+-->
+
+<p>与えられたアルゴリズムとパスワードを使用する暗号オブジェクトを作成して返します。
+<!--
+`algorithm` is dependent on OpenSSL, examples are `'aes192'`, etc.  On
+recent releases, `openssl list-cipher-algorithms` will display the
+available cipher algorithms.  `password` is used to derive key and IV,
+which must be a `'binary'` encoded string or a [buffer](buffer.html).
+-->
+
+</p>
+<p><code>algorithm</code> は、OpenSSL に依存します。例えば <code>'aes192'</code> などです。
+最近のリリースでは、<code>openssl list-cipher-algorithms</code>
+で利用可能な暗号アルゴリズムが表示されます。
+<code>password</code> はキーと IV の生成に使用されます。
+これは <code>'binary'</code> でエンコードされた文字列または <a href="buffer.html">buffer</a>
+でなければなりません
+
+</p>
+<!--
+It is a [stream](stream.html) that is both readable and writable.  The
+written data is used to compute the hash.  Once the writable side of
+the stream is ended, use the `read()` method to get the computed hash
+digest.  The legacy `update` and `digest` methods are also supported.
+-->
+
+<p>これは読み込みと書き込みの両方が可能な <a href="stream.html">ストリーム</a> です。
+書き込まれたデータはハッシュを計算するために使われます。
+一度ストリームの書き込み側が閉じられると、計算されたハッシュダイジェストを
+読み出すために <code>read()</code> メソッドを使うことができます。
+レガシーな <code>update()</code> および <code>digest()</code> メソッドもサポートされます。
+
+</p>
+<h2>crypto.createCipheriv(algorithm, key, iv)<span><a class="mark" href="#crypto_crypto_createcipheriv_algorithm_key_iv" id="crypto_crypto_createcipheriv_algorithm_key_iv">#</a></span></h2>
+<!--
+Creates and returns a cipher object, with the given algorithm, key and
+iv.
+-->
+
+<p>与えられたアルゴリズムとキーおよび IV を使用する暗号オブジェクトを作成して
+返します。
+
+</p>
+<!--
+`algorithm` is the same as the argument to `createCipher()`.  `key` is
+the raw key used by the algorithm.  `iv` is an [initialization
+vector](http://en.wikipedia.org/wiki/Initialization_vector).
+-->
+
+<p><code>algorithm</code> は <code>createCipher()</code> の引数と同じです。
+<code>key</code> はアルゴリズムで使用される生のキーです。
+<code>iv</code> は<a href="http://en.wikipedia.org/wiki/Initialization_vector">initialization
+vector</a> です。
+
+</p>
+<!--
+`key` and `iv` must be `'binary'` encoded strings or
+[buffers](buffer.html).
+-->
+
+<p><code>key</code> と <code>iv</code> は <code>'binary'</code> でエンコードされた文字列または
+<a href="buffer.html">buffers</a> でなければなりません
+
+</p>
+<h2>Class: Cipher<span><a class="mark" href="#crypto_class_cipher" id="crypto_class_cipher">#</a></span></h2>
+<!--
+Class for encrypting data.
+-->
+
+<p>データを暗号化するためのクラスです。
+
+</p>
+<!--
+Returned by `crypto.createCipher` and `crypto.createCipheriv`.
+-->
+
+<p><code>crypto.createCipher</code> および <code>crypto.createCipheriv</code> から返されます。
+
+</p>
+<!--
+Cipher objects are [streams](stream.html) that are both readable and
+writable.  The written plain text data is used to produce the
+encrypted data on the readable side.  The legacy `update` and `final`
+methods are also supported.
+-->
+
+<p>暗号化オブジェクトは読み込みと書き込みの両方が可能な
+<a href="stream.html">ストリーム</a> です。
+書き込まれたプレーンテキストデータは、読み込み側に暗号化されたデータを
+生成するために使われます。
+レガシーな <code>update()</code> および <code>final()</code> メソッドもサポートされます。
+
+</p>
+<h3>cipher.update(data, [input_encoding], [output_encoding])<span><a class="mark" href="#crypto_cipher_update_data_input_encoding_output_encoding" id="crypto_cipher_update_data_input_encoding_output_encoding">#</a></span></h3>
+<!--
+Updates the cipher with `data`, the encoding of which is given in
+`input_encoding` and can be `'utf8'`, `'ascii'` or `'binary'`.  If no
+encoding is provided, then a buffer is expected.
+If `data` is a `Buffer` then `input_encoding` is ignored.
+-->
+
+<p><code>data</code> で暗号を更新します。
+<code>input_encoding</code> で与えられるエンコーディングは <code>'utf8'</code>、<code>'ascii'</code>、<code>'binary'</code> のいずれかです。
+エンコーディングが与えられなかった場合はバッファが期待されます。
+もし <code>data</code> が <code>Buffer</code> なら、<code>input_encoding</code> は無視されます。
+
+</p>
+<!--
+The `output_encoding` specifies the output format of the enciphered
+data, and can be `'binary'`, `'base64'` or `'hex'`.  If no encoding is
+provided, then a buffer is returned.
+-->
+
+<p><code>output_encoding</code> は暗号化されたデータの出力フォーマットを指定するもので、
+<code>'utf8'</code>、<code>'ascii'</code> または <code>'binary'</code> のいずれかです。
+エンコーディングが与えられなかった場合はバッファが返されます。
+
+</p>
+<!--
+Returns the enciphered contents, and can be called many times with new
+data as it is streamed.
+-->
+
+<p>暗号化されたコンテンツが返されます。これは新しいデータがストリームに流される際に何度も呼び出されます。
+
+</p>
+<h3>cipher.final([output_encoding])<span><a class="mark" href="#crypto_cipher_final_output_encoding" id="crypto_cipher_final_output_encoding">#</a></span></h3>
+<!--
+Returns any remaining enciphered contents, with `output_encoding`
+being one of: `'binary'`, `'base64'` or `'hex'`.  If no encoding is
+provided, then a buffer is returned.
+-->
+
+<p>暗号化されたコンテンツの残りを返します。
+<code>output_encoding</code> は次のいずれかです: <code>'binary'</code>、<code>'base64'</code> または <code>'hex'</code>。
+エンコーディングが与えられなかった場合はバッファが返されます。
+
+</p>
+<!--
+Note: `cipher` object can not be used after `final()` method has been
+called.
+-->
+
+<p>注意: <code>final()</code> メソッドが呼び出された後で <code>cipher</code> 
+オブジェクトを使うことはできません。
+
+</p>
+<h3>cipher.setAutoPadding(auto_padding=true)<span><a class="mark" href="#crypto_cipher_setautopadding_auto_padding_true" id="crypto_cipher_setautopadding_auto_padding_true">#</a></span></h3>
+<!--
+You can disable automatic padding of the input data to block size. If
+`auto_padding` is false, the length of the entire input data must be a
+multiple of the cipher's block size or `final` will fail.  Useful for
+non-standard padding, e.g. using `0x0` instead of PKCS padding. You
+must call this before `cipher.final`.
+-->
+
+<p>入力データが自動的にブロックサイズにパディングされることを
+抑止することができます。
+<code>auto_padding</code> が <code>false</code> の場合、入力データ全体の長さは
+暗号ブロックサイズの倍数でなければなりません。
+でなければ、<code>final()</code> は失敗します。
+これは非標準のパディング、たとえば PKCS パディングの代わりに
+<code>0x0</code> を使う場合に便利です。
+<code>cipher.final()</code> の前に呼び出す必要があります。
+
+
+</p>
+<h2>crypto.createDecipher(algorithm, password)<span><a class="mark" href="#crypto_crypto_createdecipher_algorithm_password" id="crypto_crypto_createdecipher_algorithm_password">#</a></span></h2>
+<!--
+Creates and returns a decipher object, with the given algorithm and
+key.  This is the mirror of the [createCipher()][] above.
+-->
+
+<p>与えられたアルゴリズムとパスワードを使用する復号オブジェクトを作成して返します。
+これは前述の <a href="#crypto_crypto_createcipher_algorithm_password">createCipher()</a> の鏡写しです。
+
+</p>
+<h2>crypto.createDecipheriv(algorithm, key, iv)<span><a class="mark" href="#crypto_crypto_createdecipheriv_algorithm_key_iv" id="crypto_crypto_createdecipheriv_algorithm_key_iv">#</a></span></h2>
+<!--
+Creates and returns a decipher object, with the given algorithm, key
+and iv.  This is the mirror of the [createCipheriv()][] above.
+-->
+
+<p>与えられたアルゴリズムとキー、IV を使用する復号オブジェクトを作成して返します。
+これは前述の <a href="#crypto_crypto_createcipheriv_algorithm_key_iv">createCipheriv()</a> の鏡写しです。
+
+</p>
+<h2>Class: Decipher<span><a class="mark" href="#crypto_class_decipher" id="crypto_class_decipher">#</a></span></h2>
+<!--
+Class for decrypting data.
+
+Returned by `crypto.createDecipher` and `crypto.createDecipheriv`.
+-->
+
+<p>復号化のためのクラスです。
+
+</p>
+<p><code>crypto.createDecipher</code> および <code>crypto.createDecipheriv</code> から返されます。
+
+</p>
+<!--
+Decipher objects are [streams](stream.html) that are both readable and
+writable.  The written enciphered data is used to produce the
+plain-text data on the the readable side.  The legacy `update` and
+`final` methods are also supported.
+-->
+
+<p>復号化オブジェクトは読み込みと書き込みの両方が可能な
+<a href="stream.html">ストリーム</a> です。
+書き込まれた暗号化データは、読み込み側にプレーンテキストデータを
+生成するために使われます。
+レガシーな <code>update()</code> および <code>final()</code> メソッドもサポートされます。
+
+</p>
+<h3>decipher.update(data, [input_encoding], [output_encoding])<span><a class="mark" href="#crypto_decipher_update_data_input_encoding_output_encoding" id="crypto_decipher_update_data_input_encoding_output_encoding">#</a></span></h3>
+<!--
+Updates the decipher with `data`, which is encoded in `'binary'`,
+`'base64'` or `'hex'`.  If no encoding is provided, then a buffer is
+expected.
+If `data` is a `Buffer` then `input_encoding` is ignored.
+-->
+
+<p><code>'binary'</code>、<code>'base64'</code> または <code>'hex'</code> のいずれかでエンコードされた復号を
+<code>data</code> で更新します。
+エンコーディングが与えられなかった場合はバッファが期待されます。
+もし <code>data</code> が <code>Buffer</code> なら、<code>input_encoding</code> は無視されます。
+
+</p>
+<!--
+The `output_decoding` specifies in what format to return the
+deciphered plaintext: `'binary'`, `'ascii'` or `'utf8'`.  If no
+encoding is provided, then a buffer is returned.
+-->
+
+<p><code>output_decoding</code> は復号化されたプレーンテキストのフォーマットを指定するもので、
+<code>'binary'</code>、<code>'ascii'</code> あるいは <code>'utf8'</code> のいずれかです。
+エンコーディングが与えられなかった場合はバッファが返されます。
+
+
+</p>
+<h3>decipher.final([output_encoding])<span><a class="mark" href="#crypto_decipher_final_output_encoding" id="crypto_decipher_final_output_encoding">#</a></span></h3>
+<!--
+Returns any remaining plaintext which is deciphered, with
+`output_encoding` being one of: `'binary'`, `'ascii'` or `'utf8'`.  If
+no encoding is provided, then a buffer is returned.
+-->
+
+<p>復号化されたプレーンテキストの残りを返します。
+<code>output_decoding</code> は <code>'binary'</code>、<code>'ascii'</code> あるいは <code>'utf8'</code> のいずれかです。
+エンコーディングが与えられなかった場合はバッファが返されます。
+
+</p>
+<!--
+Note: `decipher` object can not be used after `final()` method has been
+called.
+-->
+
+<p>注意: <code>final()</code> メソッドが呼び出された後で <code>decipher</code> 
+オブジェクトを使うことはできません。
+
+</p>
+<h3>decipher.setAutoPadding(auto_padding=true)<span><a class="mark" href="#crypto_decipher_setautopadding_auto_padding_true" id="crypto_decipher_setautopadding_auto_padding_true">#</a></span></h3>
+<!--
+You can disable auto padding if the data has been encrypted without
+standard block padding to prevent `decipher.final` from checking and
+removing it. Can only work if the input data's length is a multiple of
+the ciphers block size. You must call this before streaming data to
+`decipher.update`.
+-->
+
+<p>データブロックが非標準のパディングで暗号化されている場合、
+<code>decipher.final()</code> によるチェックを無効にすることができます。
+入力データの長さが暗号ブロックサイズの倍数の場合のみ動作します。
+<code>decipher.update()</code> の前に呼び出す必要があります。
+
+</p>
+<h2>crypto.createSign(algorithm)<span><a class="mark" href="#crypto_crypto_createsign_algorithm" id="crypto_crypto_createsign_algorithm">#</a></span></h2>
+<!--
+Creates and returns a signing object, with the given algorithm.  On
+recent OpenSSL releases, `openssl list-public-key-algorithms` will
+display the available signing algorithms. Examples are `'RSA-SHA256'`.
+-->
+
+<p>与えられたアルゴリズムで署名オブジェクトを作成して返します。
+最近のOpenSSLのリリースでは、<code>openssl list-public-key-algorithms</code>
+で利用可能な署名アルゴリズムの一覧が表示されます。例えば 'RSA-SHA256'。
+
+</p>
+<h2>Class: Sign<span><a class="mark" href="#crypto_class_sign" id="crypto_class_sign">#</a></span></h2>
+<!--
+Class for generating signatures.
+
+Returned by `crypto.createSign`.
+-->
+
+<p>署名を作成するためのクラスです。
+
+</p>
+<p><code>crypto.createSign</code> から返されます。
+
+</p>
+<!--
+Sign objects are writable [streams](stream.html).  The written data is
+used to generate the signature.  Once all of the data has been
+written, the `sign` method will return the signature.  The legacy
+`update` method is also supported.
+-->
+
+<p>署名オブジェクトは書き込み可能な <a href="stream.html">ストリーム</a> です。
+書き込まれたデータは署名を生成するために使われます。
+全てのデータが書き込まれると、<code>sign()</code> メソッドはその署名を返します。
+レガシーな <code>update()</code> メソッドもサポートされます。
+
+</p>
+<h3>sign.update(data)<span><a class="mark" href="#crypto_sign_update_data" id="crypto_sign_update_data">#</a></span></h3>
+<!--
+Updates the sign object with data.  This can be called many times
+with new data as it is streamed.
+-->
+
+<p>署名オブジェクトをデータで更新します。
+これは新しいデータがストリームに流される際に何度も呼び出されます。
+
+</p>
+<h3>sign.sign(private_key, [output_format])<span><a class="mark" href="#crypto_sign_sign_private_key_output_format" id="crypto_sign_sign_private_key_output_format">#</a></span></h3>
+<!--
+Calculates the signature on all the updated data passed through the
+sign.  `private_key` is a string containing the PEM encoded private
+key for signing.
+-->
+
+<p>署名オブジェクトに渡された全ての更新データで署名を計算します。
+<code>private_key</code> は PEM でエンコードされた秘密鍵を内容とする文字列です。
+
+</p>
+<!--
+Returns the signature in `output_format` which can be `'binary'`,
+`'hex'` or `'base64'`. If no encoding is provided, then a buffer is
+returned.
+-->
+
+<p><code>'binary'</code>、<code>'hex'</code>、あるいは <code>'base64'</code> のいずれかを指定した <code>output_format</code>
+による署名を返します。
+エンコーディングが与えられなかった場合はバッファが返されます。
+
+</p>
+<!--
+Note: `sign` object can not be used after `sign()` method has been
+called.
+-->
+
+<p>注意: <code>sign()</code> メソッドが呼び出された後で <code>sign</code> 
+オブジェクトを使うことはできません。
+
+</p>
+<h2>crypto.createVerify(algorithm)<span><a class="mark" href="#crypto_crypto_createverify_algorithm" id="crypto_crypto_createverify_algorithm">#</a></span></h2>
+<!--
+Creates and returns a verification object, with the given algorithm.
+This is the mirror of the signing object above.
+-->
+
+<p>与えられたアルゴリズムで検証オブジェクトを作成して返します。これは前述の署名オブジェクトと鏡写しです。
+
+</p>
+<h2>Class: Verify<span><a class="mark" href="#crypto_class_verify" id="crypto_class_verify">#</a></span></h2>
+<!--
+Class for verifying signatures.
+
+Returned by `crypto.createVerify`.
+-->
+
+<p>署名を検証するためのクラスです。
+
+</p>
+<p><code>crypto.createVerify</code> から返されます。
+
+</p>
+<!--
+Verify objects are writable [streams](stream.html).  The written data
+is used to validate against the supplied signature.  Once all of the
+data has been written, the `verify` method will return true if the
+supplied signature is valid.  The legacy `update` method is also
+supported.
+-->
+
+<p>検証オブジェクトは書き込み可能な <a href="stream.html">ストリーム</a> です。
+書き込まれたデータは与えられた署名を検証するために使われます。
+全てのデータが書き込まれると、<code>verify()</code> メソッドは与えられた署名が正しければ
+<code>true</code> を返します。
+レガシーな <code>update()</code> メソッドもサポートされます。
+
+</p>
+<h3>verifier.update(data)<span><a class="mark" href="#crypto_verifier_update_data" id="crypto_verifier_update_data">#</a></span></h3>
+<!--
+Updates the verifier object with data.  This can be called many times
+with new data as it is streamed.
+-->
+
+<p>検証オブジェクトをデータで更新します。
+これは新しいデータがストリームに流される際に何度も呼び出されます。
+
+</p>
+<h3>verifier.verify(object, signature, [signature_format])<span><a class="mark" href="#crypto_verifier_verify_object_signature_signature_format" id="crypto_verifier_verify_object_signature_signature_format">#</a></span></h3>
+<!--
+Verifies the signed data by using the `object` and `signature`.
+`object` is  a string containing a PEM encoded object, which can be
+one of RSA public key, DSA public key, or X.509 certificate.
+`signature` is the previously calculated signature for the data, in
+the `signature_format` which can be `'binary'`, `'hex'` or `'base64'`.
+If no encoding is specified, then a buffer is expected.
+-->
+
+<p>署名されたデータを <code>object</code> と <code>signature</code> で検証します。
+<code>object</code> は RSA 公開鍵、DSA 公開鍵、X.509証明書のいずれかを
+PEM でエンコードしたオブジェクトです。
+<code>signature</code> は先に計算したデータの署名で、
+その <code>signature_format</code> は <code>'binary'</code>、<code>'hex'</code>、または <code>'base64'</code>
+のいずれかです。
+エンコーディングが与えられなかった場合はバッファが期待されます。
+
+</p>
+<!--
+Returns true or false depending on the validity of the signature for
+the data and public key.
+-->
+
+<p>署名されたデータと公開鍵による検証の結果によって true または false を返します。
+
+</p>
+<!--
+Note: `verifier` object can not be used after `verify()` method has been
+called.
+-->
+
+<p>注意: <code>verify()</code> メソッドを呼び出した後で <code>verifier</code> 
+オブジェクトを使うことはできません。
+
+</p>
+<h2>crypto.createDiffieHellman(prime_length)<span><a class="mark" href="#crypto_crypto_creatediffiehellman_prime_length" id="crypto_crypto_creatediffiehellman_prime_length">#</a></span></h2>
+<!--
+Creates a Diffie-Hellman key exchange object and generates a prime of
+the given bit length. The generator used is `2`.
+-->
+
+<p>ディフィー・ヘルマン鍵共有オブジェクトを作成し、
+与えられた長さの素数を生成します。生成元は <code>2</code> です。
+
+</p>
+<h2>crypto.createDiffieHellman(prime, [encoding])<span><a class="mark" href="#crypto_crypto_creatediffiehellman_prime_encoding" id="crypto_crypto_creatediffiehellman_prime_encoding">#</a></span></h2>
+<!--
+Creates a Diffie-Hellman key exchange object using the supplied prime.
+The generator used is `2`. Encoding can be `'binary'`, `'hex'`, or
+`'base64'`.  If no encoding is specified, then a buffer is expected.
+-->
+
+<p>与えられた素数からディフィー・ヘルマン鍵共有オブジェクトを作成します。
+生成元は <code>2</code> です。
+エンコーディングは <code>'binary'</code>、<code>'hex'</code>、または <code>'base64'</code> のいずれかです。
+エンコーディングが与えられなかった場合はバッファが返されます。
+
+</p>
+<h2>Class: DiffieHellman<span><a class="mark" href="#crypto_class_diffiehellman" id="crypto_class_diffiehellman">#</a></span></h2>
+<!--
+The class for creating Diffie-Hellman key exchanges.
+
+Returned by `crypto.createDiffieHellman`.
+-->
+
+<p>ディフィー・ヘルマン鍵共有のためのクラスです。
+
+</p>
+<p><code>crypto.creaateDiffieHellman</code> から返されます。
+
+</p>
+<h3>diffieHellman.generateKeys([encoding])<span><a class="mark" href="#crypto_diffiehellman_generatekeys_encoding" id="crypto_diffiehellman_generatekeys_encoding">#</a></span></h3>
+<!--
+Generates private and public Diffie-Hellman key values, and returns
+the public key in the specified encoding. This key should be
+transferred to the other party. Encoding can be `'binary'`, `'hex'`,
+or `'base64'`.  If no encoding is provided, then a buffer is returned.
+-->
+
+<p>ディフィー・ヘルマン法で秘密および公開鍵を作成し、
+指定の方法でエンコーディングされた公開鍵を返します。
+この鍵は相手側に渡されるものです。
+エンコーディングは <code>'binary'</code>、<code>'hex'</code>、または <code>'base64'</code> のいずれかです。
+エンコーディングが与えられなかった場合はバッファが返されます。
+
+</p>
+<h3>diffieHellman.computeSecret(other_public_key, [input_encoding], [output_encoding])<span><a class="mark" href="#crypto_diffiehellman_computesecret_other_public_key_input_encoding_output_encoding" id="crypto_diffiehellman_computesecret_other_public_key_input_encoding_output_encoding">#</a></span></h3>
+<!--
+Computes the shared secret using `other_public_key` as the other
+party's public key and returns the computed shared secret. Supplied
+key is interpreted using specified `input_encoding`, and secret is
+encoded using specified `output_encoding`. Encodings can be
+`'binary'`, `'hex'`, or `'base64'`. If the input encoding is not
+provided, then a buffer is expected.
+-->
+
+<p><code>other_public_key</code> を相手側の公開鍵として共有の秘密鍵を計算して返します。
+与えられた公開鍵は指定の <code>input_encoding</code> を使って解釈され、
+秘密鍵は <code>output_encoding</code> で指定された方法でエンコードされます。
+エンコーディングは <code>'binary'</code>、<code>'hex'</code>、または <code>'base64'</code> のいずれかです。
+入力のエンコーディングが与えられなかった場合はバッファが期待されます。
+
+</p>
+<!--
+If no output encoding is given, then a buffer is returned.
+-->
+
+<p>出力のエンコーディングが与えられなかった場合はバッファが返されます。
+
+</p>
+<h3>diffieHellman.getPrime([encoding])<span><a class="mark" href="#crypto_diffiehellman_getprime_encoding" id="crypto_diffiehellman_getprime_encoding">#</a></span></h3>
+<!--
+Returns the Diffie-Hellman prime in the specified encoding, which can
+be `'binary'`, `'hex'`, or `'base64'`. If no encoding is provided,
+then a buffer is returned.
+-->
+
+<p>ディフィー・ヘルマン法の素数を指定のエンコーディングで返します。
+エンコーディングは <code>'binary'</code>、<code>'hex'</code>、または <code>'base64'</code> のいずれかです。
+エンコーディングが与えられなかった場合はバッファが返されます。
+
+</p>
+<h3>diffieHellman.getGenerator([encoding])<span><a class="mark" href="#crypto_diffiehellman_getgenerator_encoding" id="crypto_diffiehellman_getgenerator_encoding">#</a></span></h3>
+<!--
+Returns the Diffie-Hellman generator in the specified encoding, which can
+be `'binary'`, `'hex'`, or `'base64'`. If no encoding is provided,
+then a buffer is returned.
+-->
+
+<p>ディフィー・ヘルマン法の生成元を指定のエンコーディングで返します。
+エンコーディングは <code>'binary'</code>、<code>'hex'</code>、または <code>'base64'</code> のいずれかです。
+エンコーディングが与えられなかった場合はバッファが返されます。
+
+</p>
+<h3>diffieHellman.getPublicKey([encoding])<span><a class="mark" href="#crypto_diffiehellman_getpublickey_encoding" id="crypto_diffiehellman_getpublickey_encoding">#</a></span></h3>
+<!--
+Returns the Diffie-Hellman public key in the specified encoding, which
+can be `'binary'`, `'hex'`, or `'base64'`. If no encoding is provided,
+then a buffer is returned.
+-->
+
+<p>ディフィー・ヘルマン法による公開鍵を指定のエンコーディングで返します。
+エンコーディングは <code>'binary'</code>、<code>'hex'</code>、または <code>'base64'</code> のいずれかです。
+エンコーディングが与えられなかった場合はバッファが返されます。
+
+</p>
+<h3>diffieHellman.getPrivateKey([encoding])<span><a class="mark" href="#crypto_diffiehellman_getprivatekey_encoding" id="crypto_diffiehellman_getprivatekey_encoding">#</a></span></h3>
+<!--
+Returns the Diffie-Hellman private key in the specified encoding,
+which can be `'binary'`, `'hex'`, or `'base64'`. If no encoding is
+provided, then a buffer is returned.
+-->
+
+<p>ディフィー・ヘルマン法による秘密鍵を指定のエンコーディングで返します。
+エンコーディングは <code>'binary'</code>、<code>'hex'</code>、または <code>'base64'</code> のいずれかです。
+エンコーディングが与えられなかった場合はバッファが返されます。
+
+</p>
+<h3>diffieHellman.setPublicKey(public_key, [encoding])<span><a class="mark" href="#crypto_diffiehellman_setpublickey_public_key_encoding" id="crypto_diffiehellman_setpublickey_public_key_encoding">#</a></span></h3>
+<!--
+Sets the Diffie-Hellman public key. Key encoding can be `'binary'`,
+`'hex'` or `'base64'`. If no encoding is provided, then a buffer is
+expected.
+-->
+
+<p>ディフィー・ヘルマン法による公開鍵を設定します。
+鍵のエンコーディングは <code>'binary'</code>、<code>'hex'</code>、または <code>'base64'</code> のいずれかです。
+エンコーディングが与えられなかった場合はバッファが期待されます。
+
+</p>
+<h3>diffieHellman.setPrivateKey(private_key, [encoding])<span><a class="mark" href="#crypto_diffiehellman_setprivatekey_private_key_encoding" id="crypto_diffiehellman_setprivatekey_private_key_encoding">#</a></span></h3>
+<!--
+Sets the Diffie-Hellman private key. Key encoding can be `'binary'`,
+`'hex'` or `'base64'`. If no encoding is provided, then a buffer is
+expected.
+-->
+
+<p>ディフィー・ヘルマン法による秘密鍵を設定します。
+鍵のエンコーディングは <code>'binary'</code>、<code>'hex'</code>、または <code>'base64'</code> のいずれかです。
+エンコーディングが与えられなかった場合はバッファが期待されます。
+
+</p>
+<h2>crypto.getDiffieHellman(group_name)<span><a class="mark" href="#crypto_crypto_getdiffiehellman_group_name" id="crypto_crypto_getdiffiehellman_group_name">#</a></span></h2>
+<!--
+Creates a predefined Diffie-Hellman key exchange object.  The
+supported groups are: `'modp1'`, `'modp2'`, `'modp5'` (defined in [RFC
+2412][]) and `'modp14'`, `'modp15'`, `'modp16'`, `'modp17'`,
+`'modp18'` (defined in [RFC 3526][]).  The returned object mimics the
+interface of objects created by [crypto.createDiffieHellman()][]
+above, but will not allow to change the keys (with
+[diffieHellman.setPublicKey()][] for example).  The advantage of using
+this routine is that the parties don't have to generate nor exchange
+group modulus beforehand, saving both processor and communication
+time.
+-->
+
+<p>事前に定義された Diffie-Hellman 鍵交換オブジェクトを作成します。
+サポートされるグループは、<code>'modp1'</code>, <code>'modp2'</code>, <code>'modp5'</code>
+(<a href="http://www.rfc-editor.org/rfc/rfc2412.txt">RFC 2412</a> で定義される)、
+および <code>'modp14'</code>, <code>'modp15'</code>, <code>'modp16'</code>, <code>'modp17'</code>, <code>'modp18'</code>
+(<a href="http://www.rfc-editor.org/rfc/rfc3526.txt">RFC 3526</a> で定義される) です。
+返されるオブジェクトは、前述の
+<a href="#crypto_crypto_creatediffiehellman_prime_encoding">crypto.createDiffieHellman()</a>
+によって作成されたオブジェクトのインタフェースを模倣します。
+しかし、
+(たとえば <a href="#crypto_diffiehellman_setpublickey_public_key_encoding">diffieHellman.setPublicKey()</a> で)
+鍵を交換することはできません。
+このルーチンを使うことによるアドバンテージは、
+事前にグループ係数を生成することも交換する必要もないため、
+処理と通信の時間を共に節約できることです。
+
+</p>
+<!--
+Example (obtaining a shared secret):
+-->
+
+<p>例 (共有鍵を取得):
+
+</p>
+<pre><code>var crypto = require('crypto');
+var alice = crypto.getDiffieHellman('modp5');
+var bob = crypto.getDiffieHellman('modp5');
+
+alice.generateKeys();
+bob.generateKeys();
+
+var alice_secret = alice.computeSecret(bob.getPublicKey(), null, 'hex');
+var bob_secret = bob.computeSecret(alice.getPublicKey(), null, 'hex');
+
+/* alice_secret and bob_secret should be the same */
+console.log(alice_secret == bob_secret);</code></pre>
+<h2>crypto.pbkdf2(password, salt, iterations, keylen, callback)<span><a class="mark" href="#crypto_crypto_pbkdf2_password_salt_iterations_keylen_callback" id="crypto_crypto_pbkdf2_password_salt_iterations_keylen_callback">#</a></span></h2>
+<!--
+Asynchronous PBKDF2 applies pseudorandom function HMAC-SHA1 to derive
+a key of given length from the given password, salt and iterations.
+The callback gets two arguments `(err, derivedKey)`.
+-->
+
+<p>疑似乱数を HMAC-SHA1 関数に適用して、与えられたパスワードと salt 
+(ランダムなバイト値)、および繰り返しから、指定された長さの鍵を生成する、
+非同期の PBKDF2 です。
+コールバック関数は二つの引数を受け取る <code>(err, derivedKey)</code> です。
+
+</p>
+<h2>crypto.pbkdf2Sync(password, salt, iterations, keylen)<span><a class="mark" href="#crypto_crypto_pbkdf2sync_password_salt_iterations_keylen" id="crypto_crypto_pbkdf2sync_password_salt_iterations_keylen">#</a></span></h2>
+<!--
+Synchronous PBKDF2 function.  Returns derivedKey or throws error.
+-->
+
+<p>同期版の PBKDF2 関数。
+生成された鍵を返すか、例外をスローします。
+
+</p>
+<h2>crypto.randomBytes(size, [callback])<span><a class="mark" href="#crypto_crypto_randombytes_size_callback" id="crypto_crypto_randombytes_size_callback">#</a></span></h2>
+<!--
+Generates cryptographically strong pseudo-random data. Usage:
+-->
+
+<p>暗号学的で、強い疑似乱数データを生成します。使用法:
+
+</p>
+<pre><code>// async
+crypto.randomBytes(256, function(ex, buf) {
+  if (ex) throw ex;
+  console.log('Have %d bytes of random data: %s', buf.length, buf);
+});
+
+// sync
+try {
+  var buf = crypto.randomBytes(256);
+  console.log('Have %d bytes of random data: %s', buf.length, buf);
+} catch (ex) {
+  // handle error
+  // most likely, entropy sources are drained
+}</code></pre>
+<!--
+NOTE: Will throw error or invoke callback with error, if there is not enough
+accumulated entropy to generate cryptographically strong data. In other words,
+`crypto.randomBytes` without callback will not block even if all entropy sources
+are drained.
+-->
+
+<p>注意: もし暗号理論的に強いデータを生成するために十分な累積エントロピーが
+なければ、エラーがスローされるか、エラーと共にコールバックが呼ばれます。
+言い換えると、コールバックを渡さずに <code>crypto.randomBytes()</code> を呼び出しても、
+全てのエントロピー源が枯渇するまでブロックするわけではありません。
+
+</p>
+<h2>crypto.pseudoRandomBytes(size, [callback])<span><a class="mark" href="#crypto_crypto_pseudorandombytes_size_callback" id="crypto_crypto_pseudorandombytes_size_callback">#</a></span></h2>
+<!--
+Generates *non*-cryptographically strong pseudo-random data. The data
+returned will be unique if it is sufficiently long, but is not
+necessarily unpredictable. For this reason, the output of this
+function should never be used where unpredictability is important,
+such as in the generation of encryption keys.
+-->
+
+<p>暗号学的では <em>ない</em>、強い疑似乱数データを生成します。
+返されるデータは十分に長ければユニークですが、
+必ずしも予測不可能ではありません。
+この理由のため、この関数の出力を暗号化キーの生成など、予測不可能であることが
+重要なところでは決して使用しないでください。
+
+</p>
+<!--
+Usage is otherwise identical to `crypto.randomBytes`.
+-->
+
+<p>他の使い方は <code>crypto.randomBytes</code> と同じです。
+
+</p>
+<h2>crypto.DEFAULT_ENCODING<span><a class="mark" href="#crypto_crypto_default_encoding" id="crypto_crypto_default_encoding">#</a></span></h2>
+<!--
+The default encoding to use for functions that can take either strings
+or buffers.  The default value is `'buffer'`, which makes it default
+to using Buffer objects.  This is here to make the crypto module more
+easily compatible with legacy programs that expected `'binary'` to be
+the default encoding.
+-->
+
+<p>関数が使用するエンコーディングのデフォルトは、文字列かバッファの
+いずれかにすることができます。
+
+</p>
+<!--
+Note that new programs will probably expect buffers, so only use this
+as a temporary measure.
+-->
+
+<p>新しいプログラムはおそらくバッファを期待することに注意してください。
+これは一時的な手段としてのみ使用してください。
+
+</p>
+<h2>Recent API Changes<span><a class="mark" href="#crypto_recent_api_changes" id="crypto_recent_api_changes">#</a></span></h2>
+<!--
+The Crypto module was added to Node before there was the concept of a
+unified Stream API, and before there were Buffer objects for handling
+binary data.
+-->
+
+<p>Crypto モジュールは、統合されたストリーム API やバイトデータを扱う Buffer
+オブジェクトよりも先に Node に追加されました。
+
+</p>
+<!--
+As such, the streaming classes don't have the typical methods found on
+other Node classes, and many methods accepted and returned
+Binary-encoded strings by default rather than Buffers.  This was
+changed to use Buffers by default instead.
+-->
+
+<p>そのため、このストリーミングなクラスは他の Node のクラスに見られる
+典型的なメソッドを持たず、多くのメソッドは引数や戻り値に
+Buffer ではなくバイナリエンコードされた文字列を使います。
+
+</p>
+<!--
+This is a breaking change for some use cases, but not all.
+-->
+
+<p>これはあるユースケースにおいては互換性を損ないますが、
+全てのケースではありません。
+
+</p>
+<!--
+For example, if you currently use the default arguments to the Sign
+class, and then pass the results to the Verify class, without ever
+inspecting the data, then it will continue to work as before.  Where
+you once got a binary string and then presented the binary string to
+the Verify object, you'll now get a Buffer, and present the Buffer to
+the Verify object.
+-->
+
+<p>たとえば、Sign クラスをデフォルト引数で使っていて、
+その結果を全く調べずに Verify クラスに渡している場合、
+それは以前と同じように動くでしょう。
+それは、現時点ではバイナリ文字列を受け取ってそのバイナリ文字列を
+Veriy オブジェクトに渡しますが、将来は Buffer を受け取ってその
+Buffer を Verify オブジェクトに渡すようになります。
+
+</p>
+<!--
+However, if you were doing things with the string data that will not
+work properly on Buffers (such as, concatenating them, storing in
+databases, etc.), or you are passing binary strings to the crypto
+functions without an encoding argument, then you will need to start
+providing encoding arguments to specify which encoding you'd like to
+use.  To switch to the previous style of using binary strings by
+default, set the `crypto.DEFAULT_ENCODING` field to 'binary'.  Note
+that new programs will probably expect buffers, so only use this as a
+temporary measure.
+-->
+
+<p>しかしながら、Buffer が文字列と正確に同じようには動かない何かをしている場合
+(例えば、それらを連結したり、データベースに保存したりするなど)、
+あるいはバイナリ文字列を Crypto の関数にエンコーディング引数無しで
+渡している場合、エンコーディング引数を与えてどのエンコーディングを
+使用しているかを指定する必要があります。
+以前のようにデフォルトでバイナリ文字列を使うように切り替えるには、
+<code>crypto.DEFAULT_ENCODING</code> フィールドに <code>binary</code> を設定します。
+新しいプログラムはおそらくバッファを期待することに注意してください。
+これは一時的な手段としてのみ使用してください。
+
+
+</p>
+
+          </div>
+        </div>
+    </div>
+    <div id="footer">
+        <a href="http://joyent.com" class="joyent-logo">Joyent</a>
+        <ul class="clearfix">
+            <!--
+            <li><a href="/">Node.js</a></li>
+            <li><a href="/download/">Download</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a href="http://npmjs.org/">npm Registry</a></li>
+            <li><a href="http://nodejs.org/api/">Docs</a></li>
+            <li><a href="http://blog.nodejs.org">Blog</a></li>
+            <li><a href="/community/">Community</a></li>
+            <li><a href="/logos/">Logos</a></li>
+            -->
+            <li><a href="../">Node.js</a></li>
+            <li><a href="../#download">ダウンロード</a></li>
+            <li><a href="../about/">概要</a></li>
+            <li><a href="http://npmjs.org/">npm レジストリ</a></li>
+            <li><a href="../api/">ドキュメント</a></li>
+            <li><a href="http://blog.nodejs.org">ブログ</a></li>
+            <li><a href="../community/">コミュニティ</a></li>
+            <li><a href="../logos/">ロゴ</a></li>
+            <li><a href="http://jobs.nodejs.org/">Jobs</a></li>
+            <li><a href="http://twitter.com/nodejs" class="twitter">@nodejs</a></li>
+        </ul>
+
+        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.26/LICENSE">license</a>.</p>
+    </div>
+
+  <script src="../sh_main.js"></script>
+  <script src="../sh_javascript.min.js"></script>
+  <script>highlight(undefined, undefined, 'pre');</script>
+  <script>
+    window._gaq = [['_setAccount', 'UA-10874194-2'], ['_trackPageview']];
+    (function(d, t) {
+      var g = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      g.src = '//www.google-analytics.com/ga.js';
+      s.parentNode.insertBefore(g, s);
+    }(document, 'script'));
+  </script>
+</body>
+</html>
+
