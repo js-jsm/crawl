@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Global Objects Node.js v0.10.26 Manual & Documentation</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/sh.css">
+  <link rel="canonical" href="http://nodejs.org/api/globals.html">
+</head>
+<body class="alt apidoc" id="api-section-globals">
+    <div id="intro" class="interior">
+        <a href="/" title="Go back to the home page">
+            <img id="logo" src="http://nodejs.org/images/logo-light.png" alt="node.js">
+        </a>
+    </div>
+    <div id="content" class="clearfix">
+        <div id="column2" class="interior">
+            <ul>
+                <!--
+                <li><a href="/" class="home">Home</a></li>
+                <li><a href="/download/" class="download">Download</a></li>
+                <li><a href="/about/" class="about">About</a></li>
+                <li><a href="http://npmjs.org/" class="npm">npm Registry</a></li>
+                <li><a href="http://nodejs.org/api/" class="docs current">Docs</a></li>
+                <li><a href="http://blog.nodejs.org" class="blog">Blog</a></li>
+                <li><a href="/community/" class="community">Community</a></li>
+                <li><a href="/logos/" class="logos">Logos</a></li>
+                -->
+               <li><a href="../" class="home">ホーム</a></li>
+               <li><a href="../#download" class="download">ダウンロード</a></li>
+               <li><a href="../about/" class="about">概要</a></li>
+               <li><a href="http://npmjs.org/" class="npm">npm レジストリ</a></li>
+               <li><a href="../api/" class="docs current">ドキュメント</a></li>
+               <li><a href="http://blog.nodejs.org" class="blog">ブログ</a></li>
+               <li><a href="../community/" class="community">コミュニティ</a></li>
+               <li><a href="../logos/" class="logos">ロゴ</a></li>
+                <li><a href="http://jobs.nodejs.org/" class="jobs">Jobs</a></li>
+            </ul>
+            <p class="twitter"><a href="http://twitter.com/nodejs">@nodejs</a></p>
+        </div>
+
+        <div id="column1" class="interior">
+          <header>
+            <h1>Node.js v0.10.26 マニュアル & ドキュメンテーション</h1>
+            <div id="gtoc">
+              <p>
+                <a href="index.html" name="toc">Index</a> |
+                <a href="all.html">View on single page</a> |
+                <a href="globals.json">View as JSON</a>
+              </p>
+            </div>
+            <hr>
+          </header>
+
+          <div id="toc">
+            <h2>Table of Contents</h2>
+            <ul>
+<li><a href="#globals_global_objects">Global Objects</a><ul>
+<li><a href="#globals_global">global</a></li>
+<li><a href="#globals_process">process</a></li>
+<li><a href="#globals_console">console</a></li>
+<li><a href="#globals_class_buffer">Class: Buffer</a></li>
+<li><a href="#globals_require">require()</a><ul>
+<li><a href="#globals_require_resolve">require.resolve()</a></li>
+<li><a href="#globals_require_cache">require.cache</a></li>
+<li><a href="#globals_require_extensions">require.extensions</a></li>
+</ul>
+</li>
+<li><a href="#globals_filename">__filename</a></li>
+<li><a href="#globals_dirname">__dirname</a></li>
+<li><a href="#globals_module">module</a></li>
+<li><a href="#globals_exports">exports</a></li>
+<li><a href="#globals_settimeout_cb_ms">setTimeout(cb, ms)</a></li>
+<li><a href="#globals_cleartimeout_t">clearTimeout(t)</a></li>
+<li><a href="#globals_setinterval_cb_ms">setInterval(cb, ms)</a></li>
+<li><a href="#globals_clearinterval_t">clearInterval(t)</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+
+          <div id="apicontent">
+            <h1>Global Objects<span><a class="mark" href="#globals_global_objects" id="globals_global_objects">#</a></span></h1>
+<!-- type=misc -->
+
+<!--
+These objects are available in all modules. Some of these objects aren't
+actually in the global scope but in the module scope - this will be noted.
+-->
+
+<p>これらのオブジェクトは全てのモジュールで有効です。
+これらのオブジェクトのいくつかは実際はグローバルスコープではなくモジュールスコープです - 注意してください。
+
+</p>
+<h2>global<span><a class="mark" href="#globals_global" id="globals_global">#</a></span></h2>
+<!-- type=global -->
+
+<!--
+* {Object} The global namespace object.
+-->
+
+<ul>
+<li>{Object} グローバルなネームスペースのオブジェクト</li>
+</ul>
+<!--
+In browsers, the top-level scope is the global scope. That means that in
+browsers if you're in the global scope `var something` will define a global
+variable. In Node this is different. The top-level scope is not the global
+scope; `var something` inside a Node module will be local to that module.
+-->
+
+<p>ブラウザでは、トップレベルのスコープはグローバルスコープです。
+これは、ブラウザではグローバルスコープで <code>var something</code> と定義するとグローバル変数になることを意味します。
+Node では異なります。
+トップレベルのスコープはグローバルスコープではありません;
+Node のモジュール内での <code>var something</code> はそのモジュールでローカルになります。
+
+</p>
+<h2>process<span><a class="mark" href="#globals_process" id="globals_process">#</a></span></h2>
+<!-- type=global -->
+
+<ul>
+<li>{Object}</li>
+</ul>
+<!--
+The process object. See the [process object][] section.
+-->
+
+<p>プロセスオブジェクトです。<a href="process.html#process_process">process オブジェクト</a> の節を参照してください。
+
+</p>
+<h2>console<span><a class="mark" href="#globals_console" id="globals_console">#</a></span></h2>
+<!-- type=global -->
+
+<ul>
+<li>{Object}</li>
+</ul>
+<!--
+Used to print to stdout and stderr. See the [console][] section.
+-->
+
+<p>標準出力および標準エラー出力へのプリントに使われます。
+<a href="console.html">コンソール</a> を参照してください。
+
+</p>
+<h2>Class: Buffer<span><a class="mark" href="#globals_class_buffer" id="globals_class_buffer">#</a></span></h2>
+<!-- type=global -->
+
+<ul>
+<li>{Function}</li>
+</ul>
+<!--
+Used to handle binary data. See the [buffer section][]
+-->
+
+<p>バイナリデータを扱うために使われます。
+<a href="buffer.html">バッファセクション</a> を参照してください。
+
+</p>
+<h2>require()<span><a class="mark" href="#globals_require" id="globals_require">#</a></span></h2>
+<!-- type=var -->
+
+<ul>
+<li>{Function}</li>
+</ul>
+<!--
+To require modules. See the [Modules][] section.  `require` isn't actually a
+global but rather local to each module.
+-->
+
+<p>require モジュールを指します。<a href="modules.html#modules_modules">モジュール</a> の節を参照してください。
+<code>require</code> は実際はグローバルではなく、各モジュール毎のローカルです。
+
+</p>
+<h3>require.resolve()<span><a class="mark" href="#globals_require_resolve" id="globals_require_resolve">#</a></span></h3>
+<!--
+Use the internal `require()` machinery to look up the location of a module,
+but rather than loading the module, just return the resolved filename.
+-->
+
+<p><code>require()</code> の内部でモジュールの位置を検索するために使われます。
+モジュールのロードは行わず、ファイル名を解決して返すだけです。
+
+</p>
+<h3>require.cache<span><a class="mark" href="#globals_require_cache" id="globals_require_cache">#</a></span></h3>
+<div class="signature"><ul>
+<li><span class="type">Object</span></li>
+</ul></div>
+<!--
+Modules are cached in this object when they are required. By deleting a key
+value from this object, the next `require` will reload the module.
+-->
+
+<p>モジュールが要求されると、このオブジェクトの中にキャッシュされます。
+このオブジェクトからキーと値を削除すると、次にそのモジュールが
+<code>require</code> されたときにリロードされます。
+
+</p>
+<h3>require.extensions<span><a class="mark" href="#globals_require_extensions" id="globals_require_extensions">#</a></span></h3>
+<pre class="api_stability_0">Stability: 0 - Deprecated</pre><div class="signature"><ul>
+<li><span class="type">Object</span></li>
+</ul></div>
+<!--
+Instruct `require` on how to handle certain file extensions.
+
+Process files with the extension `.sjs` as `.js`:
+-->
+
+<p><code>require</code> にファイル拡張子を扱う方法を教えます。
+
+</p>
+<p>拡張子が <code>.sjs</code> であるファイルの処理を <code>.js</code> と同じにするには:
+
+</p>
+<pre><code>require.extensions['.sjs'] = require.extensions['.js'];</code></pre>
+<!--
+**Deprecated**  In the past, this list has been used to load
+non-JavaScript modules into Node by compiling them on-demand.
+However, in practice, there are much better ways to do this, such as
+loading modules via some other Node program, or compiling them to
+JavaScript ahead of time.
+-->
+
+<p><strong>廃止予定</strong> かつて、このリストは非 JavaScript モジュールを必要に応じて
+コンパイルし、Node にロードするために使われていました。
+しかし実際には、他の Node プログラムを通じてロードしたり、
+事前に JavaScript にコンパイルするなど、よりよい方法があります。
+
+</p>
+<!--
+Since the Module system is locked, this feature will probably never go
+away.  However, it may have subtle bugs and complexities that are best
+left untouched.
+-->
+
+<p>モジュールシステムはロックされているので、この機能はおそらく
+無くならないでしょう。
+しかしながら、それは微妙なバグや複雑さがあってもそのまま放置されるでしょう。
+
+</p>
+<h2>__filename<span><a class="mark" href="#globals_filename" id="globals_filename">#</a></span></h2>
+<!-- type=var -->
+
+<ul>
+<li>{String}</li>
+</ul>
+<!--
+The filename of the code being executed.  This is the resolved absolute path
+of this code file.  For a main program this is not necessarily the same
+filename used in the command line.  The value inside a module is the path
+to that module file.
+-->
+
+<p>実行されているコードのファイル名です。これは解決された絶対パスです。
+メインプログラムでは、必ずしもコマンドライン引数で使われたファイル名と
+同じではありません。
+モジュールの中では、この値はそのモジュールファイルのパスとなります。
+
+</p>
+<!--
+Example: running `node example.js` from `/Users/mjr`
+-->
+
+<p>例: <code>node example.js</code> を <code>/Users/mjr</code> で実行する
+
+</p>
+<pre><code>console.log(__filename);
+// /Users/mjr/example.js</code></pre>
+<!--
+`__filename` isn't actually a global but rather local to each module.
+-->
+
+<p><code>__filename</code> は実際はグローバルではなく、各モジュール毎のローカルです。
+
+</p>
+<h2>__dirname<span><a class="mark" href="#globals_dirname" id="globals_dirname">#</a></span></h2>
+<!-- type=var -->
+
+<ul>
+<li>{String}</li>
+</ul>
+<!--
+The name of the directory that the currently executing script resides in.
+-->
+
+<p>現在実行されているスクリプトが存在するディレクトリの名前です。
+
+</p>
+<!--
+Example: running `node example.js` from `/Users/mjr`
+-->
+
+<p>例: <code>node example.js</code> を <code>/Users/mjr</code> で実行する
+
+</p>
+<pre><code>console.log(__dirname);
+// /Users/mjr</code></pre>
+<!--
+`__dirname` isn't actually a global but rather local to each module.
+-->
+
+<p><code>__dirname</code> は実際はグローバルではなく、各モジュール毎のローカルです。
+
+
+</p>
+<h2>module<span><a class="mark" href="#globals_module" id="globals_module">#</a></span></h2>
+<!-- type=var -->
+
+<ul>
+<li>{Object}</li>
+</ul>
+<!--
+A reference to the current module. In particular
+`module.exports` is used for defining what a module exports and makes
+available through `require()`.
+-->
+
+<p>現在のモジュールへの参照です。
+<code>module.exports</code> は、モジュールが公開して <code>require()</code> を通じて利用可能になる
+ものを定めるために使われます。
+
+</p>
+<!--
+`module` isn't actually a global but rather local to each module.
+-->
+
+<p><code>module</code> は実際はグローバルではなく、各モジュール毎のローカルです。
+
+</p>
+<!--
+See the [module system documentation][] for more information.
+-->
+
+<p>より詳しくは <a href="modules.html">モジュールシステムのドキュメント</a> を参照してください。
+
+</p>
+<h2>exports<span><a class="mark" href="#globals_exports" id="globals_exports">#</a></span></h2>
+<!-- type=var -->
+
+<!--
+A reference to the `module.exports` that is shorter to type.
+See [module system documentation][] for details on when to use `exports` and
+when to use `module.exports`.
+-->
+
+<p><code>module.exports</code> への参照です。
+いつ <code>exports</code> を使い、いつ <code>module.exports</code> を使うかの詳細は
+<a href="modules.html">モジュールシステムのドキュメント</a> を参照してください。
+
+</p>
+<!--
+`exports` isn't actually a global but rather local to each module.
+-->
+
+<p><code>exports</code> は実際はグローバルではなく、各モジュール毎のローカルです。
+
+</p>
+<!--
+See the [module system documentation][] for more information.
+
+See the [module section][] for more information.
+-->
+
+<p>より詳しくは <a href="modules.html#modules_modules">モジュール</a> を参照してください。
+
+</p>
+<h2>setTimeout(cb, ms)<span><a class="mark" href="#globals_settimeout_cb_ms" id="globals_settimeout_cb_ms">#</a></span></h2>
+<!--
+Run callback `cb` after *at least* `ms` milliseconds. The actual delay depends
+on external factors like OS timer granularity and system load.
+-->
+
+<p><em>少なくとも</em> <code>ms</code> ミリ秒が経過した後、コールバック <code>cb</code> を実行します。
+実際の遅延は OS のタイマ分解能やシステムの負荷など外部要因に依存します。
+
+</p>
+<!--
+The timeout must be in the range of 1-2,147,483,647 inclusive. If the value is
+outside that range, it's changed to 1 millisecond. Broadly speaking, a timer
+cannot span more than 24.8 days.
+-->
+
+<p>タイムアウト値は 1～2,147,483,647 の範囲内でなければなりません。
+もし値がこの範囲外だった場合は 1 ミリ秒となります。
+大雑把に言って、タイマは 24.8 日を越えることはできません。
+
+</p>
+<!--
+Returns an opaque value that represents the timer.
+-->
+
+<p>タイマを表現する不透明な値を返します。
+
+</p>
+<h2>clearTimeout(t)<span><a class="mark" href="#globals_cleartimeout_t" id="globals_cleartimeout_t">#</a></span></h2>
+<!--
+Stop a timer that was previously created with `setTimeout()`. The callback will
+not execute.
+-->
+
+<p><code>setTimeout()</code> によって以前に作成されたタイマを終了します。
+コールバックは実行されなくなります。
+
+</p>
+<h2>setInterval(cb, ms)<span><a class="mark" href="#globals_setinterval_cb_ms" id="globals_setinterval_cb_ms">#</a></span></h2>
+<!--
+Run callback `cb` repeatedly every `ms` milliseconds. Note that the actual
+interval may vary, depending on external factors like OS timer granularity and
+system load. It's never less than `ms` but it may be longer.
+-->
+
+<p><code>ms</code> ミリ秒ごとにコールバック <code>cb</code> を繰り返し実行します。
+OS のタイマ分解能やシステムの負荷など外部要因によって、
+実際のインターバルが異なるかもしれないことに注意してください。
+それは決して <code>ms</code> より短いことはありませんが、より長いことがあります。
+
+</p>
+<!--
+The interval must be in the range of 1-2,147,483,647 inclusive. If the value is
+outside that range, it's changed to 1 millisecond. Broadly speaking, a timer
+cannot span more than 24.8 days.
+-->
+
+<p>インターバル値は 1～2,147,483,647 の範囲内でなければなりません。
+もし値がこの範囲外だった場合は 1 ミリ秒となります。
+大雑把に言って、タイマは 24.8 日を越えることはできません。
+
+</p>
+<!--
+Returns an opaque value that represents the timer.
+-->
+
+<p>タイマを表現する不透明な値を返します。
+
+</p>
+<h2>clearInterval(t)<span><a class="mark" href="#globals_clearinterval_t" id="globals_clearinterval_t">#</a></span></h2>
+<!--
+Stop a timer that was previously created with `setInterval()`. The callback
+will not execute.
+-->
+
+<p><code>setInterval()</code> によって以前に作成されたタイマを終了します。
+コールバックは実行されなくなります。
+
+</p>
+<!--type=global-->
+
+<!--
+The timer functions are global variables. See the [timers][] section.
+-->
+
+<p>タイマー関数はグローバル変数です。<a href="timers.html">タイマー</a> を参照してください。
+
+</p>
+<!--
+[buffer section]: buffer.html
+[module section]: modules.html
+[module system documentation]: modules.html
+[Modules]: modules.html#modules_modules
+[process object]: process.html#process_process
+[console]: console.html
+[timers]: timers.html
+-->
+
+
+          </div>
+        </div>
+    </div>
+    <div id="footer">
+        <a href="http://joyent.com" class="joyent-logo">Joyent</a>
+        <ul class="clearfix">
+            <!--
+            <li><a href="/">Node.js</a></li>
+            <li><a href="/download/">Download</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a href="http://npmjs.org/">npm Registry</a></li>
+            <li><a href="http://nodejs.org/api/">Docs</a></li>
+            <li><a href="http://blog.nodejs.org">Blog</a></li>
+            <li><a href="/community/">Community</a></li>
+            <li><a href="/logos/">Logos</a></li>
+            -->
+            <li><a href="../">Node.js</a></li>
+            <li><a href="../#download">ダウンロード</a></li>
+            <li><a href="../about/">概要</a></li>
+            <li><a href="http://npmjs.org/">npm レジストリ</a></li>
+            <li><a href="../api/">ドキュメント</a></li>
+            <li><a href="http://blog.nodejs.org">ブログ</a></li>
+            <li><a href="../community/">コミュニティ</a></li>
+            <li><a href="../logos/">ロゴ</a></li>
+            <li><a href="http://jobs.nodejs.org/">Jobs</a></li>
+            <li><a href="http://twitter.com/nodejs" class="twitter">@nodejs</a></li>
+        </ul>
+
+        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.26/LICENSE">license</a>.</p>
+    </div>
+
+  <script src="../sh_main.js"></script>
+  <script src="../sh_javascript.min.js"></script>
+  <script>highlight(undefined, undefined, 'pre');</script>
+  <script>
+    window._gaq = [['_setAccount', 'UA-10874194-2'], ['_trackPageview']];
+    (function(d, t) {
+      var g = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      g.src = '//www.google-analytics.com/ga.js';
+      s.parentNode.insertBefore(g, s);
+    }(document, 'script'));
+  </script>
+</body>
+</html>
+
