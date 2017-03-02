@@ -1,18 +1,34 @@
-// url에 있는 파일을 savepath에 다운 로드한다.
+// url에 있는 파일을 savepath에 다운로드한다.
 
-var url = "https://jpub.tistory.com/";
+// 다운 로드할 URL을 지정
+var url = "http://jpub.tistory.com/";
+// 저장할 위치를 지정
 var savepath = "test.html";
 
-var http = require('https');
-var fs = require('fs');
+// 사용 모듈 정의
+// npm install -> package.json ->npm down 받아서
+// -> node_modules에 저장되어 있는 모듈들을 가져오는것.
+// require() 함수 실행시켜 http모듈을 받아 http에 저장
+var http = require('http'); //HTTP 모듈
 
+// createWriteStream을 실행 시켜
+// 어디에 저장할건지 savepath(경로 설정)
+var fs = require('fs'); // 파일 처리 관련 모듈
+
+// 출력 지정
 var outfile = fs.createWriteStream(savepath);
 
-http.get(url, function(res) {
-  res.pipe(outfile);
-  res.on('end', function() {
-    outfile.close();
-    console.log('ok');
+//비동기로 URL의 파일 다운로드
+// get() 함수 실행 - ajax함수
 
-  });
+// get함수가 실행이 될때
+// res http문자열
+// pipe로 outfile사용
+//
+http.get(url, function(res) {
+      res.pipe(outfile); // ==> new File
+      res.on('end', function() { //'end' => 파일이 끝나면 function실행
+          outfile.close();
+          console.log('성공했다 캬캬');
+      });
 });
