@@ -12,14 +12,13 @@ var url = 'http://jpub.tistory.com';
 var param = {};
 
 client.fetch(url, param, function(err, $, res) {
-      if(err) {
+    if(err) {
         console.log('Error : ', err);
         return;
-      }
+    }
 
-      // 다운로드한 결과를 화면에 출력
-      var html = $.html();
-      console.log(html);
+    // 다운로드한 결과를 화면에 출력
+    var html = $.html();
+    console.log(html);
 
-  }
-);
+});
