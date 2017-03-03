@@ -1,0 +1,1326 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>process Node.js v0.10.26 Manual & Documentation</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/sh.css">
+  <link rel="canonical" href="http://nodejs.org/api/process.html">
+</head>
+<body class="alt apidoc" id="api-section-process">
+    <div id="intro" class="interior">
+        <a href="/" title="Go back to the home page">
+            <img id="logo" src="http://nodejs.org/images/logo-light.png" alt="node.js">
+        </a>
+    </div>
+    <div id="content" class="clearfix">
+        <div id="column2" class="interior">
+            <ul>
+                <!--
+                <li><a href="/" class="home">Home</a></li>
+                <li><a href="/download/" class="download">Download</a></li>
+                <li><a href="/about/" class="about">About</a></li>
+                <li><a href="http://npmjs.org/" class="npm">npm Registry</a></li>
+                <li><a href="http://nodejs.org/api/" class="docs current">Docs</a></li>
+                <li><a href="http://blog.nodejs.org" class="blog">Blog</a></li>
+                <li><a href="/community/" class="community">Community</a></li>
+                <li><a href="/logos/" class="logos">Logos</a></li>
+                -->
+               <li><a href="../" class="home">ホーム</a></li>
+               <li><a href="../#download" class="download">ダウンロード</a></li>
+               <li><a href="../about/" class="about">概要</a></li>
+               <li><a href="http://npmjs.org/" class="npm">npm レジストリ</a></li>
+               <li><a href="../api/" class="docs current">ドキュメント</a></li>
+               <li><a href="http://blog.nodejs.org" class="blog">ブログ</a></li>
+               <li><a href="../community/" class="community">コミュニティ</a></li>
+               <li><a href="../logos/" class="logos">ロゴ</a></li>
+                <li><a href="http://jobs.nodejs.org/" class="jobs">Jobs</a></li>
+            </ul>
+            <p class="twitter"><a href="http://twitter.com/nodejs">@nodejs</a></p>
+        </div>
+
+        <div id="column1" class="interior">
+          <header>
+            <h1>Node.js v0.10.26 マニュアル & ドキュメンテーション</h1>
+            <div id="gtoc">
+              <p>
+                <a href="index.html" name="toc">Index</a> |
+                <a href="all.html">View on single page</a> |
+                <a href="process.json">View as JSON</a>
+              </p>
+            </div>
+            <hr>
+          </header>
+
+          <div id="toc">
+            <h2>Table of Contents</h2>
+            <ul>
+<li><a href="#process_process">process</a><ul>
+<li><a href="#process_event_exit">Event: 'exit'</a></li>
+<li><a href="#process_event_uncaughtexception">Event: 'uncaughtException'</a></li>
+<li><a href="#process_signal_events">Signal Events</a></li>
+<li><a href="#process_process_stdout">process.stdout</a></li>
+<li><a href="#process_process_stderr">process.stderr</a></li>
+<li><a href="#process_process_stdin">process.stdin</a></li>
+<li><a href="#process_process_argv">process.argv</a></li>
+<li><a href="#process_process_execpath">process.execPath</a></li>
+<li><a href="#process_process_execargv">process.execArgv</a></li>
+<li><a href="#process_process_abort">process.abort()</a></li>
+<li><a href="#process_process_chdir_directory">process.chdir(directory)</a></li>
+<li><a href="#process_process_cwd">process.cwd()</a></li>
+<li><a href="#process_process_env">process.env</a></li>
+<li><a href="#process_process_exit_code">process.exit([code])</a></li>
+<li><a href="#process_process_getgid">process.getgid()</a></li>
+<li><a href="#process_process_setgid_id">process.setgid(id)</a></li>
+<li><a href="#process_process_getuid">process.getuid()</a></li>
+<li><a href="#process_process_setuid_id">process.setuid(id)</a></li>
+<li><a href="#process_process_getgroups">process.getgroups()</a></li>
+<li><a href="#process_process_setgroups_groups">process.setgroups(groups)</a></li>
+<li><a href="#process_process_initgroups_user_extra_group">process.initgroups(user, extra_group)</a></li>
+<li><a href="#process_process_version">process.version</a></li>
+<li><a href="#process_process_versions">process.versions</a></li>
+<li><a href="#process_process_config">process.config</a></li>
+<li><a href="#process_process_kill_pid_signal">process.kill(pid, [signal])</a></li>
+<li><a href="#process_process_pid">process.pid</a></li>
+<li><a href="#process_process_title">process.title</a></li>
+<li><a href="#process_process_arch">process.arch</a></li>
+<li><a href="#process_process_platform">process.platform</a></li>
+<li><a href="#process_process_memoryusage">process.memoryUsage()</a></li>
+<li><a href="#process_process_nexttick_callback">process.nextTick(callback)</a></li>
+<li><a href="#process_process_maxtickdepth">process.maxTickDepth</a></li>
+<li><a href="#process_process_umask_mask">process.umask([mask])</a></li>
+<li><a href="#process_process_uptime">process.uptime()</a></li>
+<li><a href="#process_process_hrtime">process.hrtime()</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+
+          <div id="apicontent">
+            <h1>process<span><a class="mark" href="#process_process" id="process_process">#</a></span></h1>
+<!-- type=global -->
+
+<!--
+The `process` object is a global object and can be accessed from anywhere.
+It is an instance of [EventEmitter][].
+-->
+
+<p><code>process</code> はグローバルオブジェクトで、どこからでもアクセスすることができます。
+それは <a href="events.html#events_class_events_eventemitter">EventEmitter</a> のインスタンスです。
+
+
+</p>
+<h2>Event: 'exit'<span><a class="mark" href="#process_event_exit" id="process_event_exit">#</a></span></h2>
+<!--
+Emitted when the process is about to exit. There is no way to prevent the
+exiting of the event loop at this point, and once all `exit` listeners have
+finished running the process will exit. Therefore you **must** only perform
+**synchronous** operations in this handler. This is a good hook to perform
+checks on the module's state (like for unit tests). The callback takes one
+argument, the code the process is exiting with.
+-->
+
+<p>プロセスが終了しようとしている時に生成されます。
+この位置からイベントループを抜けることを防ぐ方法はなく、全ての <code>'exit'</code>
+リスナーの実行が完了すると、プロセスは終了します。
+従って、このハンドラでできることは <strong>同期</strong> 操作 <strong>だけ</strong> です。
+これは (ユニットテストのように) モジュールの状態をチェックするのに適した
+フックとなります。
+コールバックはプロセスの終了コードを唯一の引数として呼び出されます。
+
+</p>
+<!--
+Example of listening for `exit`:
+-->
+
+<p><code>exit</code> を監視する例:
+
+</p>
+<pre><code>process.on('exit', function(code) {
+  // do *NOT* do this
+  setTimeout(function() {
+    console.log('This will not run');
+  }, 0);
+  console.log('About to exit with code:', code);
+});</code></pre>
+<h2>Event: 'uncaughtException'<span><a class="mark" href="#process_event_uncaughtexception" id="process_event_uncaughtexception">#</a></span></h2>
+<!--
+Emitted when an exception bubbles all the way back to the event loop. If a
+listener is added for this exception, the default action (which is to print
+a stack trace and exit) will not occur.
+-->
+
+<p>発生した例外がイベントループまでたどり着いた場合に生成されます。
+もしこの例外に対するリスナーが加えられていれば、
+デフォルトの動作 (それはスタックトレースをプリントして終了します) は起こりません。
+
+</p>
+<!--
+Example of listening for `uncaughtException`:
+-->
+
+<p><code>uncaughtException</code> を監視する例:
+
+</p>
+<pre><code>process.on('uncaughtException', function(err) {
+  console.log('Caught exception: ' + err);
+});
+
+setTimeout(function() {
+  console.log('This will still run.');
+}, 500);
+
+// Intentionally cause an exception, but don't catch it.
+nonexistentFunc();
+console.log('This will not run.');</code></pre>
+<!--
+Note that `uncaughtException` is a very crude mechanism for exception
+handling and may be removed in the future.
+-->
+
+<p><code>uncaughtException</code> は例外を扱うとても荒削りなメカニズムであり、
+将来削除されるかもしれないことに注意してください。
+
+</p>
+<!--
+Don't use it, use [domains](domain.html) instead. If you do use it, restart
+your application after every unhandled exception!
+-->
+
+<p>これを使う代わりに、<a href="domain.html">ドメイン</a> を使ってください。
+それを使えば、捕まえられない例外が発生した後でもアプリケーションを
+再開することができます！
+
+</p>
+<!--
+Do *not* use it as the node.js equivalent of `On Error Resume Next`. An
+unhandled exception means your application - and by extension node.js itself -
+is in an undefined state. Blindly resuming means *anything* could happen.
+-->
+
+<p>これを Node.js における <code>On Error Resume Next</code> として <em>使わないで</em> ください。
+捕まえられなかった例外は、アプリケーション
+- および Node.js 自身の拡張 - が未定義の状態となることを意味します。
+やみくもな再開は <em>どんなことでも</em> 起こることを意味します。
+
+</p>
+<!--
+Think of resuming as pulling the power cord when you are upgrading your system.
+Nine out of ten times nothing happens - but the 10th time, your system is bust.
+-->
+
+<p>電源を引き抜きながらアプリケーションをアップグレードすることを
+想像してください。
+10 回中 9 回は何も起こりません
+- しかし 10 回目にはそのシステムは使えなくなるかもしれません。
+
+</p>
+<!--
+You have been warned.
+-->
+
+<p>これは警告です。
+
+</p>
+<h2>Signal Events<span><a class="mark" href="#process_signal_events" id="process_signal_events">#</a></span></h2>
+<!--type=event-->
+<!--name=SIGINT, SIGHUP, etc.-->
+
+<!--
+Emitted when the processes receives a signal. See sigaction(2) for a list of
+standard POSIX signal names such as SIGINT, SIGHUP, etc.
+-->
+
+<p>プロセスがシグナルを受信した場合に生成されます。
+SIGINT、SIGHUP、その他の POSIX 標準シグナル名の一覧について は sigaction(2) を参照してください。
+
+</p>
+<!--
+Example of listening for `SIGINT`:
+-->
+
+<p><code>SIGINT</code>を監視する例:
+
+</p>
+<pre><code>// Start reading from stdin so we don't exit.
+process.stdin.resume();
+
+process.on('SIGINT', function() {
+  console.log('Got SIGINT.  Press Control-D to exit.');
+});</code></pre>
+<!--
+An easy way to send the `SIGINT` signal is with `Control-C` in most terminal
+programs.
+-->
+
+<p>多くの端末プログラムで簡単に <code>SIGINT</code> を送る方法は <code>Control-C</code> を押すことです。
+
+</p>
+<!--
+Note:
+-->
+
+<p>注意:
+
+</p>
+<!--
+- `SIGUSR1` is reserved by node.js to start the debugger.  It's possible to
+  install a listener but that won't stop the debugger from starting.
+- `SIGTERM` and `SIGINT` have default handlers on non-Windows platforms that resets
+  the terminal mode before exiting with code `128 + signal number`. If one of
+  these signals has a listener installed, its default behaviour will be removed
+  (node will no longer exit).
+- `SIGPIPE` is ignored by default, it can have a listener installed.
+- `SIGHUP` is generated on Windows when the console window is closed, and on other
+  platforms under various similar conditions, see signal(7). It can have a
+  listener installed, however node will be unconditionally terminated by Windows
+  about 10 seconds later. On non-Windows platforms, the default behaviour of
+  `SIGHUP` is to terminate node, but once a listener has been installed its
+  default behaviour will be removed.
+- `SIGTERM` is not supported on Windows, it can be listened on.
+- `SIGINT` from the terminal is supported on all platforms, and can usually be
+  generated with `CTRL+C` (though this may be configurable). It is not generated
+  when terminal raw mode is enabled.
+- `SIGBREAK` is delivered on Windows when `CTRL+BREAK` is pressed, on non-Windows
+  platforms it can be listened on, but there is no way to send or generate it.
+- `SIGWINCH` is delivered when the console has been resized. On Windows, this will
+  only happen on write to the console when the cursor is being moved, or when a
+  readable tty is used in raw mode.
+- `SIGKILL` cannot have a listener installed, it will unconditionally terminate
+  node on all platforms.
+- `SIGSTOP` cannot have a listener installed.
+-->
+
+<ul>
+<li><code>SIGUSR1</code> は Node.js がデバッガを起動するために予約されています。
+リスナを登録することは出来ますが、デバッガの起動を止めることは出来ません。</li>
+<li><code>SIGTERM</code> および <code>SIGINT</code> は、Windows 以外のプラットフォームでは
+<code>128</code> + シグナル番号で終了する前にターミナルのモードをリセットする
+デフォルトのハンドラを持ちます。
+これらのシグナルのどちらかにリスナが登録されると、デフォルトの振る舞いは
+削除されます (node は終了しなくなります)。</li>
+<li><code>SIGPIPE</code> はデフォルトでは無視され、リスナを登録することが出来ます。</li>
+<li><code>SIGHUP</code> は Windows ではコンソールウィンドウが閉じられると発生します。
+他のプラットフォームでも同様の条件で発生します。詳細は signal(7)
+を参照してください。
+リスナを登録することは出来ますが、Windows では約 10 秒後に node は無条件に
+Windows によって終了されます。
+Windows 以外のプラットフォームでは、<code>SIGHUP</code> のデフォルトの振る舞いは
+nodeを終了することですが、リスナを登録するとデフォルトの振る舞いは
+削除されます。</li>
+<li><code>SIGTERM</code> は Windows ではサポートされません。
+しかし、リスナを登録することは可能です。</li>
+<li>端末からの <code>SIGINT</code> は全てのプラットフォームでサポートされ、通常 <code>CTRL+C</code>
+(おそらく設定可能でしょう) によって生成されます。
+ターミナルが raw モードの場合は生成されません。</li>
+<li><code>SIGBREAK</code> は Windows において <code>CTRL+BREAK</code> が推された時に送られます。
+Windows 以外のプラットフォームでもリスナを登録することは出来ますが、
+それを生成したり送信する方法はありません。</li>
+<li><code>SIGWINCH</code> はコンソールのサイズが変更された場合に送られます。
+Windows では、カーソルが移動するか、tty が raw モードの場合に、
+コンソールへ書き込むと発生します。</li>
+<li><code>SIGKILL</code> のリスナを組み込むことは出来ません。
+それは全てのプラットフォームで node を無条件に終了します。</li>
+<li><code>SIGSTOP</code> のリスナを組み込むことは出来ません。</li>
+</ul>
+<!--
+Note that Windows does not support sending Signals, but node offers some
+emulation with `process.kill()`, and `child_process.kill()`:
+- Sending signal `0` can be used to search for the existence of a process
+- Sending `SIGINT`, `SIGTERM`, and `SIGKILL` cause the unconditional exit of the
+  target process.
+-->
+
+<p>Windows はシグナルの送信をサポートしていませんが、nodeは<code>process.kill()</code> や
+<code>child_process.kill()</code> をエミュレートする方法を提供します:
+
+</p>
+<ul>
+<li>シグナル <code>0</code> は既存のプロセスを検索するためのものです。</li>
+<li><code>SIGINT</code>、<code>SIGTERM</code>、そして <code>SIGKILL</code> は、ターゲットのプロセスが無条件に
+終了する原因となります。</li>
+</ul>
+<h2>process.stdout<span><a class="mark" href="#process_process_stdout" id="process_process_stdout">#</a></span></h2>
+<!--
+A `Writable Stream` to `stdout`.
+-->
+
+<p><code>stdout</code> に対する <code>Writable Stream</code> です。
+
+</p>
+<!--
+Example: the definition of `console.log`
+-->
+
+<p>例: <code>console.log</code> の定義
+
+</p>
+<pre><code>console.log = function(d) {
+  process.stdout.write(d + '\n');
+};</code></pre>
+<!--
+`process.stderr` and `process.stdout` are unlike other streams in Node in
+that writes to them are usually blocking.
+-->
+
+<p><code>process.stderr</code> と <code>process.stdout</code> は Node の他のストリームと異なり、
+それらへの書き込みは通常ブロックします。
+
+</p>
+<!--
+- They are blocking in the case that they refer to regular files or TTY file
+  descriptors.
+- In the case they refer to pipes:
+  - They are blocking in Linux/Unix.
+  - They are non-blocking like other streams in Windows.
+-->
+
+<ul>
+<li>ファイル記述子が通常ファイルや TTY を参照しているケースでは、
+それらはブロックします。</li>
+<li>パイプを参照しているケースでは:<ul>
+<li>Linux/Unix ではそれらはブロックします。</li>
+<li>Windows では他のストリームと同様にブロックしません。</li>
+</ul>
+</li>
+</ul>
+<!--
+To check if Node is being run in a TTY context, read the `isTTY` property
+on `process.stderr`, `process.stdout`, or `process.stdin`:
+-->
+
+<p>Node が TTY のコンテキストで実行されているかチェックするには、
+<code>process.stderr</code>, <code>process.stdout</code>, または <code>process.stdin</code> の
+<code>isTTY</code> プロパティを参照します。
+
+</p>
+<pre><code>$ node -p "Boolean(process.stdin.isTTY)"
+true
+$ echo "foo" | node -p "Boolean(process.stdin.isTTY)"
+false
+
+$ node -p "Boolean(process.stdout.isTTY)"
+true
+$ node -p "Boolean(process.stdout.isTTY)" | cat
+false</code></pre>
+<!--
+See [the tty docs](tty.html#tty_tty) for more information.
+-->
+
+<p>より詳細は <a href="tty.html#tty_tty">the tty docs</a> を参照してください。
+
+</p>
+<h2>process.stderr<span><a class="mark" href="#process_process_stderr" id="process_process_stderr">#</a></span></h2>
+<!--
+A writable stream to stderr.
+
+`process.stderr` and `process.stdout` are unlike other streams in Node in
+that writes to them are usually blocking.
+-->
+
+<p><code>stderr</code> に対する <code>Writable Stream</code> です。
+
+</p>
+<p><code>process.stderr</code> と <code>process.stdout</code> は Node の他のストリームと異なり、
+それらへの書き込みは通常ブロックします。
+
+</p>
+<!--
+- They are blocking in the case that they refer to regular files or TTY file
+  descriptors.
+- In the case they refer to pipes:
+  - They are blocking in Linux/Unix.
+  - They are non-blocking like other streams in Windows.
+-->
+
+<ul>
+<li>ファイル記述子が通常ファイルや TTY を参照しているケースでは、
+それらはブロックします。</li>
+<li>パイプを参照しているケースでは:<ul>
+<li>Linux/Unix ではそれらはブロックします。</li>
+<li>Windows では他のストリームと同様にブロックしません。</li>
+</ul>
+</li>
+</ul>
+<h2>process.stdin<span><a class="mark" href="#process_process_stdin" id="process_process_stdin">#</a></span></h2>
+<!--
+A `Readable Stream` for stdin. 
+-->
+
+<p>標準入力に対する <code>Readable Stream</code> です。
+
+</p>
+<!--
+Example of opening standard input and listening for both events:
+-->
+
+<p>標準入力をオープンして二つのイベントを監視する例:
+
+</p>
+<pre><code>process.stdin.setEncoding('utf8');
+
+process.stdin.on('readable', function(chunk) {
+  var chunk = process.stdin.read();
+  if (chunk !== null) {
+    process.stdout.write('data: ' + chunk);
+  }
+});
+
+process.stdin.on('end', function() {
+  process.stdout.write('end');
+});</code></pre>
+<!--
+As a Stream, `process.stdin` can also be used in "old" mode that is compatible
+with scripts written for node prior v0.10.
+For more information see
+[Stream compatibility](stream.html#stream_compatibility_with_older_node_versions).
+-->
+
+<p>ストリームであるため、<code>process.stdin</code> は v0.10 以前の node 向けに書かれた
+スクリプトと互換性のある "old" モードで使うことが出来ます。より詳細な情報は
+<a href="stream.html#stream_compatibility_with_older_node_versions">Stream compatibility</a>
+を参照してください。
+
+</p>
+<!--
+In "old" Streams mode the stdin stream is paused by default, so one
+must call `process.stdin.resume()` to read from it. Note also that calling
+`process.stdin.resume()` itself would switch stream to "old" mode.
+-->
+
+<p>"old" モードでは標準入力ストリームはデフォルトで中断状態のため、
+読み込みには <code>process.stdin.resume()</code> の呼び出しが必須です。
+<code>process.stdin.resume()</code> を呼び出すことにより、それ自体がストリームを
+"old" モードに切り替えることに注意してください。
+
+</p>
+<!--
+If you are starting a new project you should prefer a more recent "new" Streams
+mode over "old" one.
+-->
+
+<p>もし新しいプロジェクトを始めるなら、"old" よりも
+"new" ストリームを好むべきです。
+
+</p>
+<h2>process.argv<span><a class="mark" href="#process_process_argv" id="process_process_argv">#</a></span></h2>
+<!--
+An array containing the command line arguments.  The first element will be
+'node', the second element will be the name of the JavaScript file.  The
+next elements will be any additional command line arguments.
+-->
+
+<p>コマンドライン引数を含む配列です。
+最初の要素は 'node'、2 番目の要素は JavaScript ファイルの名前になります。
+その後の要素はコマンドラインの追加の引数になります。
+
+</p>
+<pre><code>// print process.argv
+process.argv.forEach(function(val, index, array) {
+  console.log(index + ': ' + val);
+});</code></pre>
+<!--
+This will generate:
+-->
+
+<p>このように出力されます:
+
+</p>
+<pre><code>$ node process-2.js one two=three four
+0: node
+1: /Users/mjr/work/node/process-2.js
+2: one
+3: two=three
+4: four</code></pre>
+<h2>process.execPath<span><a class="mark" href="#process_process_execpath" id="process_process_execpath">#</a></span></h2>
+<!--
+This is the absolute pathname of the executable that started the process.
+-->
+
+<p>プロセスによって開始された実行可能ファイルの絶対パスです。
+
+</p>
+<!--
+Example:
+-->
+
+<p>例:
+
+</p>
+<pre><code>/usr/local/bin/node</code></pre>
+<h2>process.execArgv<span><a class="mark" href="#process_process_execargv" id="process_process_execargv">#</a></span></h2>
+<!--
+This is the set of node-specific command line options from the
+executable that started the process.  These options do not show up in
+`process.argv`, and do not include the node executable, the name of
+the script, or any options following the script name. These options
+are useful in order to spawn child processes with the same execution
+environment as the parent.
+-->
+
+<p>これはプロセス起動時に実行可能ファイルに与えられた node 固有の
+コマンドライン・オプション群です。
+それらのオプションは <code>process.argv</code> には現れず、node の実行可能ファイルや
+スクリプト名、スクリプト名に続くどんなオプションも含まれません。
+これらのオプションは親プロセスと同じ実行環境を持つ子プロセスを起動するために
+役に立ちます。
+
+</p>
+<!--
+Example:
+-->
+
+<p>例:
+
+</p>
+<pre><code>$ node --harmony script.js --version</code></pre>
+<!--
+results in process.execArgv:
+-->
+
+<p><code>process.execArgv</code> の結果:
+
+</p>
+<pre><code>['--harmony']</code></pre>
+<!--
+and process.argv:
+-->
+
+<p>そして <code>process.argv</code> の結果:
+
+</p>
+<pre><code>['/usr/local/bin/node', 'script.js', '--version']</code></pre>
+<h2>process.abort()<span><a class="mark" href="#process_process_abort" id="process_process_abort">#</a></span></h2>
+<!--
+This causes node to emit an abort. This will cause node to exit and
+generate a core file.
+-->
+
+<p>これは node をアボートさせます。
+これは node が終了してコアファイルを生成する原因となります。
+
+</p>
+<h2>process.chdir(directory)<span><a class="mark" href="#process_process_chdir_directory" id="process_process_chdir_directory">#</a></span></h2>
+<!--
+Changes the current working directory of the process or throws an exception if that fails.
+-->
+
+<p>プロセスのカレントワーキングディレクトリを変更します。
+もし失敗した場合は例外をスローします。
+
+</p>
+<pre><code>console.log('Starting directory: ' + process.cwd());
+try {
+  process.chdir('/tmp');
+  console.log('New directory: ' + process.cwd());
+}
+catch (err) {
+  console.log('chdir: ' + err);
+}</code></pre>
+<h2>process.cwd()<span><a class="mark" href="#process_process_cwd" id="process_process_cwd">#</a></span></h2>
+<!--
+Returns the current working directory of the process.
+-->
+
+<p>プロセスのカレントワーキングディレクトリを返します。
+
+</p>
+<pre><code>console.log('Current directory: ' + process.cwd());</code></pre>
+<h2>process.env<span><a class="mark" href="#process_process_env" id="process_process_env">#</a></span></h2>
+<!--
+An object containing the user environment. See environ(7).
+-->
+
+<p>ユーザの環境を含むオブジェクトです。environ(7) を参照してください。
+
+
+</p>
+<h2>process.exit([code])<span><a class="mark" href="#process_process_exit_code" id="process_process_exit_code">#</a></span></h2>
+<!--
+Ends the process with the specified `code`.  If omitted, exit uses the
+'success' code `0`.
+-->
+
+<p>指定の <code>code</code> でプロセスを終了します。
+もし省略されると、「成功」を示すコード <code>0</code> を使って終了します。
+
+</p>
+<!--
+To exit with a 'failure' code:
+-->
+
+<p>「失敗」を示すコードで終了する例:
+
+</p>
+<pre><code>process.exit(1);</code></pre>
+<!--
+The shell that executed node should see the exit code as 1.
+-->
+
+<p>node を実行したシェルで終了コードが 1 であることを見ることができるでしょう。
+
+
+</p>
+<h2>process.getgid()<span><a class="mark" href="#process_process_getgid" id="process_process_getgid">#</a></span></h2>
+<!--
+Note: this function is only available on POSIX platforms (i.e. not Windows)
+-->
+
+<p>注意: この関数は POSIX プラットフォーム (すなわち、非 Windows)
+でのみ利用可能です。
+
+</p>
+<!--
+Gets the group identity of the process. (See getgid(2).)
+This is the numerical group id, not the group name.
+-->
+
+<p>プロセスのグループ識別子を取得します (getgid(2) 参照)。
+これは数値によるグループ ID で、グループ名ではありません。
+
+</p>
+<pre><code>if (process.getgid) {
+  console.log('Current gid: ' + process.getgid());
+}</code></pre>
+<h2>process.setgid(id)<span><a class="mark" href="#process_process_setgid_id" id="process_process_setgid_id">#</a></span></h2>
+<!--
+Note: this function is only available on POSIX platforms (i.e. not Windows)
+-->
+
+<p>注意: この関数は POSIX プラットフォーム (すなわち、非 Windows)
+でのみ利用可能です。
+
+</p>
+<!--
+Sets the group identity of the process. (See setgid(2).)  This accepts either
+a numerical ID or a groupname string. If a groupname is specified, this method
+blocks while resolving it to a numerical ID.
+-->
+
+<p>プロセスのグループ識別子を設定します (setgid(2) 参照)。
+これは数値による ID もグループ名の文字列のどちらも受け入れます。
+もしグループ名が指定されると、数値による ID が解決できるまでこのメソッドはブロックします。
+
+</p>
+<pre><code>if (process.getgid && process.setgid) {
+  console.log('Current gid: ' + process.getgid());
+  try {
+    process.setgid(501);
+    console.log('New gid: ' + process.getgid());
+  }
+  catch (err) {
+    console.log('Failed to set gid: ' + err);
+  }
+}</code></pre>
+<h2>process.getuid()<span><a class="mark" href="#process_process_getuid" id="process_process_getuid">#</a></span></h2>
+<!--
+Note: this function is only available on POSIX platforms (i.e. not Windows)
+-->
+
+<p>注意: この関数は POSIX プラットフォーム (すなわち、非 Windows)
+でのみ利用可能です。
+
+</p>
+<!--
+Gets the user identity of the process. (See getuid(2).)
+This is the numerical userid, not the username.
+-->
+
+<p>プロセスのユーザ識別子を取得します (getuid(2) 参照)。
+これは数値によるユーザ ID で、ユーザ名ではありません。
+
+</p>
+<pre><code>if (process.getuid) {
+  console.log('Current uid: ' + process.getuid());
+}</code></pre>
+<h2>process.setuid(id)<span><a class="mark" href="#process_process_setuid_id" id="process_process_setuid_id">#</a></span></h2>
+<!--
+Note: this function is only available on POSIX platforms (i.e. not Windows)
+-->
+
+<p>注意: この関数は POSIX プラットフォーム (すなわち、非 Windows)
+でのみ利用可能です。
+
+</p>
+<!--
+Sets the user identity of the process. (See setuid(2).)  This accepts either
+a numerical ID or a username string.  If a username is specified, this method
+blocks while resolving it to a numerical ID.
+-->
+
+<p>プロセスのユーザ識別子を設定します (setuid(2) 参照)。
+これは数値による ID もユーザ名の文字列のどちらも受け入れます。
+もしユーザ名が指定されると、数値による ID が解決できるまでこのメソッドはブロックします。
+
+</p>
+<pre><code>if (process.getuid && process.setuid) {
+  console.log('Current uid: ' + process.getuid());
+  try {
+    process.setuid(501);
+    console.log('New uid: ' + process.getuid());
+  }
+  catch (err) {
+    console.log('Failed to set uid: ' + err);
+  }
+}</code></pre>
+<h2>process.getgroups()<span><a class="mark" href="#process_process_getgroups" id="process_process_getgroups">#</a></span></h2>
+<!--
+Note: this function is only available on POSIX platforms (i.e. not Windows)
+-->
+
+<p>注意: この関数は POSIC プラットフォーム (つまり Windows 以外)
+でのみ利用可能です。
+
+</p>
+<!--
+Returns an array with the supplementary group IDs. POSIX leaves it unspecified
+if the effective group ID is included but node.js ensures it always is.
+-->
+
+<p>補助グループ ID の配列を返します。
+POSIX は実効グループ ID が含まれることを明示していませんが、
+Node.js では常にそれが含まれることを保証します。
+
+
+</p>
+<h2>process.setgroups(groups)<span><a class="mark" href="#process_process_setgroups_groups" id="process_process_setgroups_groups">#</a></span></h2>
+<!--
+Note: this function is only available on POSIX platforms (i.e. not Windows)
+-->
+
+<p>注意: この関数は POSIC プラットフォーム (つまり Windows 以外)
+でのみ利用可能です。
+
+</p>
+<!--
+Sets the supplementary group IDs. This is a privileged operation, meaning you
+need to be root or have the CAP_SETGID capability.
+-->
+
+<p>補助グループ ID を設定します。
+これは特権オペレーションであり、ルートであるか、または CAP_SETGID ケーパビリティを持つ必要があります。
+
+</p>
+<!--
+The list can contain group IDs, group names or both.
+-->
+
+<p>リストはグループ ID、グループ名、または両方を含むことができます。
+
+
+</p>
+<h2>process.initgroups(user, extra_group)<span><a class="mark" href="#process_process_initgroups_user_extra_group" id="process_process_initgroups_user_extra_group">#</a></span></h2>
+<!--
+Note: this function is only available on POSIX platforms (i.e. not Windows)
+-->
+
+<p>注意: この関数は POSIC プラットフォーム (つまり Windows 以外)
+でのみ利用可能です。
+
+</p>
+<!--
+Reads /etc/group and initializes the group access list, using all groups of
+which the user is a member. This is a privileged operation, meaning you need
+to be root or have the CAP_SETGID capability.
+-->
+
+<p><code>/etc/group</code> を読み込んでグループアクセスリストを初期化し、
+user がメンバーである全てのグループを使用します。
+これは特権オペレーションであり、ルートであるか、または CAP_SETGID ケーパビリティを持つ必要があります。
+
+</p>
+<!--
+`user` is a user name or user ID. `extra_group` is a group name or group ID.
+-->
+
+<p><code>user</code> はユーザ名またはユーザ ID、
+<code>extra_group</code> はグループ名またはグループ ID です。
+
+</p>
+<!--
+Some care needs to be taken when dropping privileges. Example:
+-->
+
+<p>特権を落とす際は、いくつか注意すべき事があります。例:
+
+</p>
+<pre><code>console.log(process.getgroups());         // [ 0 ]
+process.initgroups('bnoordhuis', 1000);   // switch user
+console.log(process.getgroups());         // [ 27, 30, 46, 1000, 0 ]
+process.setgid(1000);                     // drop root gid
+console.log(process.getgroups());         // [ 27, 30, 46, 1000 ]</code></pre>
+<h2>process.version<span><a class="mark" href="#process_process_version" id="process_process_version">#</a></span></h2>
+<!--
+A compiled-in property that exposes `NODE_VERSION`.
+-->
+
+<p><code>NODE_VERSION</code> を提示するコンパイル済みプロパティです。
+
+</p>
+<pre><code>console.log('Version: ' + process.version);</code></pre>
+<h2>process.versions<span><a class="mark" href="#process_process_versions" id="process_process_versions">#</a></span></h2>
+<!--
+A property exposing version strings of node and its dependencies.
+-->
+
+<p>node と依存ライブラリのバージョン文字列を提示します。
+
+</p>
+<pre><code>console.log(process.versions);</code></pre>
+<!--
+Will print something like:
+-->
+
+<p>は以下のように出力します。
+
+</p>
+<pre><code>{ http_parser: '1.0',
+  node: '0.10.4',
+  v8: '3.14.5.8',
+  ares: '1.9.0-DEV',
+  uv: '0.10.3',
+  zlib: '1.2.3',
+  modules: '11',
+  openssl: '1.0.1e' }</code></pre>
+<h2>process.config<span><a class="mark" href="#process_process_config" id="process_process_config">#</a></span></h2>
+<!--
+An Object containing the JavaScript representation of the configure options
+that were used to compile the current node executable. This is the same as
+the "config.gypi" file that was produced when running the `./configure` script.
+
+An example of the possible output looks like:
+-->
+
+<p>現在のnode実行ファイルをコンパイルした際に使われた configure のオプションを
+JavaScript で表現したオブジェクトを保持します。
+これは <code>./configure</code> スクリプトを実行した際に生成された "cofnig.gypi"
+ファイルと同じです。
+
+</p>
+<p>実際の出力の例です:
+
+</p>
+<pre><code>{ target_defaults:
+   { cflags: [],
+     default_configuration: 'Release',
+     defines: [],
+     include_dirs: [],
+     libraries: [] },
+  variables:
+   { host_arch: 'x64',
+     node_install_npm: 'true',
+     node_prefix: '',
+     node_shared_cares: 'false',
+     node_shared_http_parser: 'false',
+     node_shared_libuv: 'false',
+     node_shared_v8: 'false',
+     node_shared_zlib: 'false',
+     node_use_dtrace: 'false',
+     node_use_openssl: 'true',
+     node_shared_openssl: 'false',
+     strict_aliasing: 'true',
+     target_arch: 'x64',
+     v8_use_snapshot: 'true' } }</code></pre>
+<h2>process.kill(pid, [signal])<span><a class="mark" href="#process_process_kill_pid_signal" id="process_process_kill_pid_signal">#</a></span></h2>
+<!--
+Send a signal to a process. `pid` is the process id and `signal` is the
+string describing the signal to send.  Signal names are strings like
+'SIGINT' or 'SIGHUP'.  If omitted, the signal will be 'SIGTERM'.
+See [Signal Events](#process_signal_events) and kill(2) for more information.
+-->
+
+<p>プロセスにシグナルを送ります。
+<code>pid</code> はプロセス ID で <code>signal</code> は送信されるシグナルを文字列で記述したものです。
+シグナルの名前は 'SIGINT' や 'SIGHUP' のような文字列です。
+省略すると、シグナルは 'SIGTERM' となります。
+詳細は <a href="#process_signal_events">Signal Events</a> または kill(2)
+を参照してください。
+
+</p>
+<!--
+Will throw an error if target does not exist, and as a special case, a signal of
+`0` can be used to test for the existence of a process.
+-->
+
+<p>対象が存在しなければエラーがスローされます。
+特別なケースとして、プロセスが存在するかどうかテストするためにシグナル
+<code>0</code> を使うことが出来ます。
+
+</p>
+<!--
+Note that just because the name of this function is `process.kill`, it is
+really just a signal sender, like the `kill` system call.  The signal sent
+may do something other than kill the target process.
+-->
+
+<p>この関数の名前が <code>process.kill</code> であるとおり、これは <code>kill</code>
+システムコールのように単にシグナルを送信することに注意してください。
+対象のプロセスを殺すためだけでなく、他のシグナルも送信できます。
+
+</p>
+<!--
+Example of sending a signal to yourself:
+-->
+
+<p>自身にシグナルを送信する例:
+
+</p>
+<pre><code>process.on('SIGHUP', function() {
+  console.log('Got SIGHUP signal.');
+});
+
+setTimeout(function() {
+  console.log('Exiting.');
+  process.exit(0);
+}, 100);
+
+process.kill(process.pid, 'SIGHUP');</code></pre>
+<!--
+Note: When SIGUSR1 is received by Node.js it starts the debugger, see
+[Signal Events](#process_signal_events).
+-->
+
+<p>注意: SIGUSR1はnode.jsによって受信され、デバッガを起動します。
+詳細は <a href="#process_signal_events">Signal Events</a> を参照してください。
+
+</p>
+<h2>process.pid<span><a class="mark" href="#process_process_pid" id="process_process_pid">#</a></span></h2>
+<!--
+The PID of the process.
+-->
+
+<p>このプロセスの PID です。
+
+</p>
+<pre><code>console.log('This process is pid ' + process.pid);</code></pre>
+<h2>process.title<span><a class="mark" href="#process_process_title" id="process_process_title">#</a></span></h2>
+<!--
+Getter/setter to set what is displayed in 'ps'.
+-->
+
+<p>'ps' でどのよう表示されるかを設定するための getter/setter です。
+
+</p>
+<!--
+When used as a setter, the maximum length is platform-specific and probably
+short.
+-->
+
+<p>setter が使われる場合、その最大長はプラットフォーム依存で、おそらく短いです。
+
+</p>
+<!--
+On Linux and OS X, it's limited to the size of the binary name plus the
+length of the command line arguments because it overwrites the argv memory.
+-->
+
+<p>Linux と OS X では、それは argv のメモリを上書きするため、
+バイナリ名にコマンドライン引数を加えたものに制限されます。
+
+</p>
+<!--
+v0.8 allowed for longer process title strings by also overwriting the environ
+memory but that was potentially insecure/confusing in some (rather obscure)
+cases.
+-->
+
+<p>v0.8 はより長いプロセスタイトル文字列で環境を上書きしていましたが、
+それはいくつかの (はっきりしない) ケースにおいて、
+潜在的に危険で混乱していました。
+
+
+</p>
+<h2>process.arch<span><a class="mark" href="#process_process_arch" id="process_process_arch">#</a></span></h2>
+<!--
+What processor architecture you're running on: `'arm'`, `'ia32'`, or `'x64'`.
+-->
+
+<p>実行しているプロセッサのアーキテクチャ: <code>'arm'</code>、<code>'ia32'</code>、または
+<code>'x64'</code>。
+
+</p>
+<pre><code>console.log('This processor architecture is ' + process.arch);</code></pre>
+<h2>process.platform<span><a class="mark" href="#process_process_platform" id="process_process_platform">#</a></span></h2>
+<!--
+What platform you're running on:
+`'darwin'`, `'freebsd'`, `'linux'`, `'sunos'` or `'win32'`
+-->
+
+<p>どのプラットフォームで動いているかを示します:
+<code>'darwin'</code>、<code>'freebsd'</code>、<code>'linux'</code>、<code>'sunos'</code>、または <code>'win32'</code>
+
+</p>
+<pre><code>console.log('This platform is ' + process.platform);</code></pre>
+<h2>process.memoryUsage()<span><a class="mark" href="#process_process_memoryusage" id="process_process_memoryusage">#</a></span></h2>
+<!--
+Returns an object describing the memory usage of the Node process
+measured in bytes.
+-->
+
+<p>Node プロセスのメモリ使用状況をバイト単位で記述したオブジェクトを返します。
+
+</p>
+<pre><code>var util = require('util');
+
+console.log(util.inspect(process.memoryUsage()));</code></pre>
+<!--
+This will generate:
+-->
+
+<p>このように生成されます:
+
+</p>
+<pre><code>{ rss: 4935680,
+  heapTotal: 1826816,
+  heapUsed: 650472 }</code></pre>
+<!--
+`heapTotal` and `heapUsed` refer to V8's memory usage.
+-->
+
+<p><code>heapTotal</code> と <code>heapUsed</code> は V8 のメモリ使用状況を参照します。
+
+
+</p>
+<h2>process.nextTick(callback)<span><a class="mark" href="#process_process_nexttick_callback" id="process_process_nexttick_callback">#</a></span></h2>
+<!--
+On the next loop around the event loop call this callback.
+This is *not* a simple alias to `setTimeout(fn, 0)`, it's much more
+efficient.  It typically runs before any other I/O events fire, but there
+are some exceptions.  See `process.maxTickDepth` below.
+-->
+
+<p>イベントループの次以降のループでコールバックを呼び出します。
+これは <code>setTimeout(fn, 0)</code> の単純なエイリアス<em>ではなく</em>、
+はるかに効率的です。
+これは通常他の I/O イベントが発生するよりも前に実行されますが、
+いくつかの例外があります。
+後述の <code>process.maxTickDepth</code> を参照してください。
+
+</p>
+<pre><code>process.nextTick(function() {
+  console.log('nextTick callback');
+});</code></pre>
+<!--
+This is important in developing APIs where you want to give the user the
+chance to assign event handlers after an object has been constructed,
+but before any I/O has occurred.
+-->
+
+<p>これは API の開発において、オブジェクトが構築された後で
+どんな I/O イベントが発生するよりも前に、
+イベントハンドラを割り当てるチャンスをユーザに与えたい場合に重要になります。
+
+</p>
+<pre><code>function MyThing(options) {
+  this.setupOptions(options);
+
+  process.nextTick(function() {
+    this.startDoingStuff();
+  }.bind(this));
+}
+
+var thing = new MyThing();
+thing.getReadyForStuff();
+
+// thing.startDoingStuff() gets called now, not before.</code></pre>
+<!--
+It is very important for APIs to be either 100% synchronous or 100%
+asynchronous.  Consider this example:
+-->
+
+<p>API は 100% 同期的か、100% 非同期的かのどちらかであることがとても重要です。
+この例を考えてみてください:
+
+</p>
+<pre><code>// WARNING!  DO NOT USE!  BAD UNSAFE HAZARD!
+function maybeSync(arg, cb) {
+  if (arg) {
+    cb();
+    return;
+  }
+
+  fs.stat('file', cb);
+}</code></pre>
+<!--
+This API is hazardous.  If you do this:
+-->
+
+<p>この API は危険です。こうすると:
+
+</p>
+<pre><code>maybeSync(true, function() {
+  foo();
+});
+bar();</code></pre>
+<!--
+then it's not clear whether `foo()` or `bar()` will be called first.
+-->
+
+<p><code>foo()</code> と <code>bar()</code> のどちらが先に呼び出されるか不明瞭になります。
+
+</p>
+<!--
+This approach is much better:
+-->
+
+<p>以下のアプローチはずっと優れています:
+
+</p>
+<pre><code>function definitelyAsync(arg, cb) {
+  if (arg) {
+    process.nextTick(cb);
+    return;
+  }
+
+  fs.stat('file', cb);
+}</code></pre>
+<h2>process.maxTickDepth<span><a class="mark" href="#process_process_maxtickdepth" id="process_process_maxtickdepth">#</a></span></h2>
+<div class="signature"><ul>
+<li><span class="type">Number</span> Default = 1000</li>
+</ul></div>
+<!--
+Callbacks passed to `process.nextTick` will *usually* be called at the
+end of the current flow of execution, and are thus approximately as fast
+as calling a function synchronously.  Left unchecked, this would starve
+the event loop, preventing any I/O from occurring.
+-->
+
+<p><code>process.nextTick()</code> に渡されたコールバックは、<em>通常</em> 現在の実行フローの
+後で呼び出され、それは関数を同期的に呼び出すのと同じくらい高速です。
+これを放置するとあらゆる I/O が阻まれ、イベントループは飢餓状態となるでしょう。
+
+</p>
+<!--
+Consider this code:
+-->
+
+<p>以下のコードを考えてみてください。
+
+</p>
+<pre><code>process.nextTick(function foo() {
+  process.nextTick(foo);
+});</code></pre>
+<!--
+In order to avoid the situation where Node is blocked by an infinite
+loop of recursive series of nextTick calls, it defers to allow some I/O
+to be done every so often.
+-->
+
+<p>nextTick の再帰が連鎖する無限ループによって Node がブロックする状況を
+避けるには、それを先送りして時々 I/O を可能にします。
+
+</p>
+<!--
+The `process.maxTickDepth` value is the maximum depth of
+nextTick-calling nextTick-callbacks that will be evaluated before
+allowing other forms of I/O to occur.
+-->
+
+<p><code>process.maxTickDepth</code> の値は、nextTick が nextTick のコールバックを呼び出す
+最大の深さで、他の I/O を可能にする前に評価されます。
+
+</p>
+<h2>process.umask([mask])<span><a class="mark" href="#process_process_umask_mask" id="process_process_umask_mask">#</a></span></h2>
+<!--
+Sets or reads the process's file mode creation mask. Child processes inherit
+the mask from the parent process. Returns the old mask if `mask` argument is
+given, otherwise returns the current mask.
+-->
+
+<p>プロセスのファイルモード作成マスクを設定または読み込みます。
+子プロセスは親プロセスからマスクを継承します。
+<code>mask</code> 引数が与えられると元のマスクが返され、そうでなければ現在のマスクが返されます。
+
+</p>
+<pre><code>var oldmask, newmask = 0644;
+
+oldmask = process.umask(newmask);
+console.log('Changed umask from: ' + oldmask.toString(8) +
+            ' to ' + newmask.toString(8));</code></pre>
+<h2>process.uptime()<span><a class="mark" href="#process_process_uptime" id="process_process_uptime">#</a></span></h2>
+<!--
+Number of seconds Node has been running.
+-->
+
+<p>Node が実行されてからの秒数です。
+
+</p>
+<h2>process.hrtime()<span><a class="mark" href="#process_process_hrtime" id="process_process_hrtime">#</a></span></h2>
+<!--
+Returns the current high-resolution real time in a `[seconds, nanoseconds]`
+tuple Array. It is relative to an arbitrary time in the past. It is not
+related to the time of day and therefore not subject to clock drift. The
+primary use is for measuring performance between intervals.
+
+You may pass in the result of a previous call to `process.hrtime()` to get
+a diff reading, useful for benchmarks and measuring intervals:
+-->
+
+<p>高分解能な現在時刻を <code>[seconds, nanoseconds]</code> の配列で返します。
+過去の任意の時間との比較することができます。
+それは一日における時刻には関連が無いため、クロックドリフトに影響されません。
+主な用途はベンチマークやインターバルの測定です。
+
+</p>
+<p>以前に <code>process.hrtime()</code> を呼び出した結果を渡すことにより、
+差分を得ることができます。これはベンチマークやインターバルの測定に便利です。
+
+</p>
+<pre><code>var time = process.hrtime();
+// [ 1800216, 25 ]
+
+setTimeout(function() {
+  var diff = process.hrtime(time);
+  // [ 1, 552 ]
+
+  console.log('benchmark took %d nanoseconds', diff[0] * 1e9 + diff[1]);
+  // benchmark took 1000000527 nanoseconds
+}, 1000);</code></pre>
+
+          </div>
+        </div>
+    </div>
+    <div id="footer">
+        <a href="http://joyent.com" class="joyent-logo">Joyent</a>
+        <ul class="clearfix">
+            <!--
+            <li><a href="/">Node.js</a></li>
+            <li><a href="/download/">Download</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a href="http://npmjs.org/">npm Registry</a></li>
+            <li><a href="http://nodejs.org/api/">Docs</a></li>
+            <li><a href="http://blog.nodejs.org">Blog</a></li>
+            <li><a href="/community/">Community</a></li>
+            <li><a href="/logos/">Logos</a></li>
+            -->
+            <li><a href="../">Node.js</a></li>
+            <li><a href="../#download">ダウンロード</a></li>
+            <li><a href="../about/">概要</a></li>
+            <li><a href="http://npmjs.org/">npm レジストリ</a></li>
+            <li><a href="../api/">ドキュメント</a></li>
+            <li><a href="http://blog.nodejs.org">ブログ</a></li>
+            <li><a href="../community/">コミュニティ</a></li>
+            <li><a href="../logos/">ロゴ</a></li>
+            <li><a href="http://jobs.nodejs.org/">Jobs</a></li>
+            <li><a href="http://twitter.com/nodejs" class="twitter">@nodejs</a></li>
+        </ul>
+
+        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.26/LICENSE">license</a>.</p>
+    </div>
+
+  <script src="../sh_main.js"></script>
+  <script src="../sh_javascript.min.js"></script>
+  <script>highlight(undefined, undefined, 'pre');</script>
+  <script>
+    window._gaq = [['_setAccount', 'UA-10874194-2'], ['_trackPageview']];
+    (function(d, t) {
+      var g = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      g.src = '//www.google-analytics.com/ga.js';
+      s.parentNode.insertBefore(g, s);
+    }(document, 'script'));
+  </script>
+</body>
+</html>
+

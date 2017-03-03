@@ -1,5 +1,5 @@
 //node_modules에서 cheerio-httpcli 모듈을 가져와 client에 저장
-// 이 모듈이 $을 제공한다.
+// 이 모듈이 $을 제공한다. -> 맞는건가?
 var client = require('cheerio-httpcli');
 
 var url = 'http://jpub.com';
