@@ -1,0 +1,11 @@
+{
+  "source": "doc/api/synopsis.md",
+  "miscs": [
+    {
+      "textRaw": "Usage",
+      "name": "Usage",
+      "type": "misc",
+      "desc": "<p><code>node [options] [v8 options] [script.js | -e "script"] [arguments]</code></p>\n<p>Please see the <a href="\"cli.html#cli_command_line_options\"">Command Line Options</a> document for information about\ndifferent options and ways to run scripts with Node.js.</p>\n<h2>Example</h2>\n<p>An example of a <a href="\"http.html\"">web server</a> written with Node.js which responds with\n<code>'Hello World'</code>:</p>\n<pre><code class="\"lang-js\"">const http = require('http');\n\nconst hostname = '127.0.0.1';\nconst port = 3000;\n\nconst server = http.createServer((req, res) => {\n  res.statusCode = 200;\n  res.setHeader('Content-Type', 'text/plain');\n  res.end('Hello World\\n');\n});\n\nserver.listen(port, hostname, () => {\n  console.log(`Server running at http://${hostname}:${port}/`);\n});\n</code></pre>\n<p>To run the server, put the code into a file called <code>example.js</code> and execute\nit with Node.js:</p>\n<pre><code class="\"lang-txt\"">$ node example.js\nServer running at http://127.0.0.1:3000/\n</code></pre>\n<p>All of the examples in the documentation can be run similarly.</p>\n"
+    }
+  ]
+}
