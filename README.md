@@ -1,4 +1,5 @@
 # STUDY for Node.js Crawling
+
 javascript와 node.js를 이용한 web crawling technic
 
 
@@ -12,13 +13,20 @@ javascript와 node.js를 이용한 web crawling technic
 
 - master 브랜치 내에 각자 폴더 만들어서 올릴 것.
 
-- ex) jaenam/src/ch03/04-atom-shell/easy-app/main.js
+- ex) jaenam/ch03/04-atom-shell/easy-app/main.js
+
+- js 및 json 등 예제 확인을 위해 필요한 파일만 업로드할 것. 결과물은 배제하기로.
+
+- 각자 브랜치에서 작업 후 머지.
+
 
 #### 4. 진도는 50페이지분량 기준으로 다음주 진도를 그 때 그 때 정하기로.
 
 #### 5. 한 명 씩 돌아가면서 presentation.
 
+
 ## 담당자 (가안)
+
 - Ch2-#. 재남
 - Ch3-1. 권성
 - Ch3-2. 유리
@@ -48,7 +56,3 @@ javascript와 node.js를 이용한 web crawling technic
 #### 3. 무단결석 10,000원. (스터디 시작 직전까지 통보 안하면 무단 결석으로 간주).
 
 - 벌금은 커피값 혹은 회식에 충당.
-
-
-FIXME: 삭제
-인증 오류로 인해 작성한 더미 글입니다.
