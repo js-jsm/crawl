@@ -43,7 +43,7 @@ javascript와 node.js를 이용한 web crawling technic
 - Ch8-2. 원준
 
 
-## 벌금
+## 벌금 
 
 #### 1. github에 안올리면 벌금 5,000원!
 
