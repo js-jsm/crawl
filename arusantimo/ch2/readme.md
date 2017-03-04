@@ -94,3 +94,51 @@ function exportToExcel(list){
   xlsx.generate(strm);
 }
 ```
+
+## xml2js
+xml를 파싱하거나 아웃풋 인풋할 수 잇는 라이브러리
+
+## crontab
+리눅스 계열에서 스케줄 설정으로 작업 예약을 할수 있게 해줌.
+
+명령어
+```
+$ crontab -e // crontab을 설정할 수 있게 설정파일을 로드한다.
+$ crontab -i  // crontab 표준 출력
+$ crontab -d // crontab 삭제
+```
+설정파일에 환경 변수 추가
+```
+PATH=/usr/local/bin:/usr/bin:/bin
+NODE_PATH=/usr/lib/node_modules
+```
+주기설정
+```
+*          *           *          *           *
+분(0-59)　　시간(0-23)　　일(1-31)　　월(1-12)　　　요일(0-7)
+```
+실행 예제
+```
+# 매분 test.sh 실행
+* * * * * /home/script/test.sh
+
+# 매주 금요일 오전 5시 45분에 test.sh 를 실행
+45 5 * * 5 /home/script/test.sh
+
+# 매일 매시간 0분, 20분, 40분에 test.sh 를 실행
+0,20,40 * * * * /home/script/test.sh
+
+# 매일 1시 0분부터 30분까지 매분 tesh.sh 를 실행
+0-30 1 * * * /home/script/test.sh
+
+# 매 10분마다 test.sh 를 실행
+*/10 * * * * /home/script/test.sh
+
+# 5일에서 6일까지 2시,3시,4시에 매 10분마다 test.sh 를 실행
+*/10 2,3,4 5-6 * * /home/script/test.sh
+```
+작업에 대한 결과를 로깅 하는 작업이 필요하므로 꼭 결과는 아웃풋 시킨다.
+```
+ * * * * /home/script/test.sh > /home/script/test.sh.log 2>&1
+ * * * * * /home/script/test.sh >> /home/script/test.sh.log 2>&1 // 지속적인 로그
+```
