@@ -1,0 +1,14 @@
+{
+  "name": "01-phantomjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "getTitle.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cheerio-httpcli": "^0.6.11"
+  }
+}

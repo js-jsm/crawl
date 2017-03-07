@@ -53,6 +53,8 @@ function downloadRec(url, level) {
     var savepath = url.split('/').slice(2).join('/');
     checkSaveDir(savepath);
     console.log(savepath);
+    //Sync이기 때문에 다른 것을 다운로드하면서 다른 파일도 다운로드함
+    //-> 그래서 느림
     fs.writeFileSync(savepath, $.html());
   });
 }

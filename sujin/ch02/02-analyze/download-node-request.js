@@ -11,3 +11,9 @@ var savepath = 'test.html';
 //                  savepath는 'test.html' 이라는 문자열 이다.
 //request에서 지정한 url파일을 savepath(빈껍데기) 에 집어 넣는다.(그려 넣는다) --> html 태그가 나오려나.
 request(url).pipe(fs.createWriteStream(savepath));
+
+/*
+http.get(url, res => {
+  res.pipe(fs.createWriteStream(savepath));
+});
+*/

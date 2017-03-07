@@ -13,9 +13,11 @@ var http = require('http'); //HTTP 모듈
 
 // createWriteStream을 실행 시켜
 // 어디에 저장할건지 savepath(경로 설정)
+// fs --> filesystem
 var fs = require('fs'); // 파일 처리 관련 모듈
 
 // 출력 지정
+// filesytem에 있는
 var outfile = fs.createWriteStream(savepath);
 
 //비동기로 URL의 파일 다운로드
@@ -26,7 +28,8 @@ var outfile = fs.createWriteStream(savepath);
 // pipe로 outfile사용
 //
 http.get(url, function(res) {
-      res.pipe(outfile); // ==> new File
+      // pipe -> 입력을 하면 출력이 될꺼다 라는 함수..(출력 -> 입력 (X))
+      res.pipe(outfile); // ==> new File을 만드는 과정
       res.on('end', function() { //'end' => 파일이 끝나면 function실행
           outfile.close();
           console.log('성공했다 캬캬');

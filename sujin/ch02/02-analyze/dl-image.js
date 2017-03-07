@@ -6,6 +6,8 @@ var fs = require('fs');
 var urlType = require('url');
 
 // 저장할 디렉토리가 없으면 생성
+// __dirname는 node에선 절대경로(node를 실행한 경로가 절대 경로)로 리턴
+// 경로에대가 img라는 폴더를 만들어 그것을 savedir에 저장을 한다
 var savedir = __dirname + '/img';
 //만약 fs에서 existsSync에 savedir을 넣고 false이면(존재 하지 않으면)
 if(!fs.existsSync(savedir)) {

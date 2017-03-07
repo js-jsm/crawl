@@ -1,4 +1,9 @@
 // 다운로드
+// 함수는 밖으로 빼두는게 낫다.
+
+var http = require('http');
+var fs = require('fs');
+
 donwload(
   'http://jpub.tistory.com/539',
   'spring.html',
@@ -18,8 +23,8 @@ donwload(
   //url의 파일을 savepath에 다운로드 하는 함수
   function donwload(url, savepath, callback) {
     //http모듈을 node_modules에서 가지고와 변수로 지정한 http에다가 가져온 http를 저장을 시킨다.
-    var http = require('http');
-    var fs = require('fs');
+    //var http = require('http'); // 실행할때마다 불러오니깐 밖으로 빼두는게 낫다.
+    //var fs = require('fs');
     // savepath가 문자열 이니깐... 문자열을 fs.createWriteStream함수 매개변수 안에 넣고
     // 문자열 이름 (ex.spring.html, angular.html) 으로 파일이름이 생성이 됨.
     // 안에 파일은 빈껍질 임.
