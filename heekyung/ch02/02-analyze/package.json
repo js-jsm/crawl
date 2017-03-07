@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "cheerio-httpcli": "^0.6.11",
+    "request": "^2.80.0"
+  }
+}
