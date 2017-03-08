@@ -6,12 +6,13 @@ var casper = require('casper').create();
 // 개시
 casper.start();
 
+
 // 페이지 열기
-casper.open('http://jpub.tistory.com');
+casper.open('http://naver.com');
 
 // 스크린샷 수행
 casper.then(function() {
-  casper.capture('screenshot.png');
+  casper.capture('screenshot2.png');
 });
 
 // 실행
