@@ -5,7 +5,7 @@ var casper = require('casper').create({
 
 var url = 'https://nid.naver.com/nidlogin.login',
     id = 'jjp372c',
-    password = 'rhcnwkd2011';
+    password = '';
 
 casper.start();
 
