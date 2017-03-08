@@ -23,7 +23,7 @@ request(API, function(err, res, body) {
   var t = new Date();
   var fname = 'USD_KRW_' +
           t.getFullYear() + '-' + (t.getMonth() + 1) +
-          '-' + t.getDay() + '.txt';
+          '-' + t.getDate() + '.txt';
 
   var text = 'lusd = ' + krw + 'krw';
   console.log('text :' + text);

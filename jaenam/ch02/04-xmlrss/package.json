@@ -1,0 +1,7 @@
+{
+  "devDependencies": {
+    "cheerio-httpcli": "^0.6.11",
+    "request": "^2.79.0",
+    "xml2js": "^0.4.17"
+  }
+}

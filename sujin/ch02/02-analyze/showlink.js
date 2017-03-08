@@ -21,8 +21,11 @@ client.fetch(url, param, function (err, $) {
       var href = $(this).attr('href'); //a태그에 있는 속성
       //console.log(href); //href : 주소 나옴
       //console.log(thisa); // this : 해당 페이지의 태그
-      //console.log(text); // 그 해당 페이지의 값
-      console.log(text + ':' + href);
+      console.log(text); // 그 해당 페이지의 값
+      //console.log(text + ':' + href);
     });
   }
 );
+// $('a') => 241개의 a태그 선택됨
+// $('a').each => item : $('a')[index]
+// text는 this의 text를 가져온다.

@@ -1,0 +1,9 @@
+{
+  "name": "03-getail",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "cheerio-httpcli": "^0.6.11"
+  }
+}
