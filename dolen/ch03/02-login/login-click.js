@@ -3,21 +3,25 @@ const casper = require('casper').create({
     logLevel: 'debug'
 });
 
-const url = 'https://nid.naver.com/nidlogin.login?url=http%3A%2F%2Fmail.naver.com%2F%3Fn%3D1488976603155%26v%3Df',
+const url = 'http://mail.naver.com/login?url=http%3A%2F%2Fmail.naver.com%2F',
       id = '',
       password = '';
 
 casper
     .start()
-    .viewport(1500, 768)
+    .viewport(1500, 800)
     .open(url)
+    .then(function() {
+        casper.mouseEvent('click', '.btn_login');
+    })
+    .wait(3000)
     .then(function() {
         casper
             .fill('#frmNIDLogin', {
                 id: id,
                 pw: password
             })
-           .mouseEvent('click', '.btn_global');
+            .mouseEvent('click', '.btn_global');
     })
     .wait(3000)
     .then(function() {
@@ -37,7 +41,7 @@ casper
            top: 0,
            left: 0,
            width: 1500,
-           height: 768
+           height: 800
         });
     })
     .run();
