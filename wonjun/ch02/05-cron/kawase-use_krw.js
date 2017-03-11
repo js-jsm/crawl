@@ -14,7 +14,7 @@ request(API, function(err, response, body) {
   const r = JSON.parse(body);
   const krw = r['KRW'];
   const t = new Date();
-  const fname = `USD_KRW_${t.getFullYear()}-${t.getMonth()+1}-${t.getDay()}.txt`;
+  const fname = `USD_KRW_${t.getFullYear()}-${t.getMonth()+1}-${t.getDate()}.txt`;
   const text = `1usd=${krw} Krw`;
 
   console.log(text);
