@@ -6,4 +6,4 @@ yarn.lock
 npm-debug.log
 **/*.iml
 **/*.txt
-**/*.html
+kwonsung/**/user.json
