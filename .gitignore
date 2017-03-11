@@ -1,7 +1,8 @@
 node_modules
-yarn.lock
+img
 .idea
 .DS_Store
+yarn.lock
 npm-debug.log
 *.iml
 jaepil/**/img/
@@ -10,3 +11,6 @@ jaepil/**/*.json
 wonjun/**/img/
 wonjun/**/*.html
 wonjun/**/*.json
+**/*.iml
+**/*.txt
+kwonsung/**/user.json

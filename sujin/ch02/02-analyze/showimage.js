@@ -17,8 +17,13 @@ client.fetch(url, param, function(err, $) {
     }
     //img태그를 가져와라.
     $('img').each(function(idx) {
-      var src = $(this).attr('src');
-      src = urlType.resolve(url, src);
-      console.log(src + ': src')
+    var src = $(this).attr('src'); //var src = $(this); --> img태그 나옴 , attr ->태그 속성 값 가져오기
+    //--> //upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/30px-Commons-logo.svg.png: src
+    src = urlType.resolve(url, src);
+                          //기본url, 상대 url
+            //urlType에서 resolve 호출 한다.
+            //상대경로를 절대 경로로 바꿔준다.
+      console.log(src + ': src');
+      //http://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/30px-Commons-logo.svg.png: src
     });
 });

@@ -19,6 +19,6 @@ client.fetch(url, param, function(err, $, res) {
 
     // 다운로드한 결과를 화면에 출력
     var html = $.html();
-    console.log(html);
-
+    //  console.log(html);
+    console.log(res);
 });

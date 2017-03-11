@@ -14,7 +14,6 @@ client.fetch(url, param, (err, $) => {
               text  = $this.text(),
               href  = $this.attr('href');
 
-        console.log($this.attr('href'));
 
         if(!href) {
             return;

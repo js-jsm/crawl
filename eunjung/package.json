@@ -1,0 +1,24 @@
+{
+  "name": "crawlstudy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "cheerio-httpcli": "^0.6.11",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
+    "request": "^2.79.0",
+    "url": "^0.11.0"
+  },
+  "devDependencies": {
+    "cheerio-httpcli": "^0.6.11",
+    "fs": "0.0.1-security",
+    "http": "0.0.0",
+    "xml2js": "^0.4.17"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

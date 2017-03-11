@@ -4,6 +4,7 @@ var client = require('cheerio-httpcli'),
     urlType = require('url'),
     request = require('request'),
     fs = require('fs'),
+    // __dirname 현재 경로의 절대 경로를 리턴 (파일인지? node 인지?)
     savedir = __dirname + '/img', // 디렉토리
     url = 'https://ko.wikipedia.org/wiki/' + encodeURIComponent('강아지'), // url
     param = {};
