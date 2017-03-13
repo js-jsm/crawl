@@ -58,7 +58,6 @@ casper.start().thenOpen("https://www.facebook.com/login", function() {
 });
 ```
 
-
 ## Electron
 Electron은 자바스크립트와 함께 제공된 풍부한 네이티브 API를 사용하여 데스크탑 애플리케이션을 만들 수 있도록 해주는 프레임워크
 
@@ -147,5 +146,16 @@ app.on('activate', () => {
 
 ### ipc모듈
 ```js
+const {
+  ipcRenderer
+} = require('electron');
+console.log(ipc.sendSync('synchronous-message', 'ping')) // "pong" 출력
+ipcRenderer.on('asynchronous-reply', (event, arg) => {
+  console.log(arg) // "pong" 출력
+})
+ipcRenderer.send('asynchronous-message', 'ping')
+
+
+
 
 ```
