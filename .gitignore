@@ -4,6 +4,13 @@ img
 .DS_Store
 yarn.lock
 npm-debug.log
+*.iml
+jaepil/**/img/
+jaepil/**/*.html
+jaepil/**/*.json
+wonjun/**/img/
+wonjun/**/*.html
+wonjun/**/*.json
 **/*.iml
 **/*.txt
-**/*.html
+kwonsung/**/user.json

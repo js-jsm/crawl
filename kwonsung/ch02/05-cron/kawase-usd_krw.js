@@ -8,7 +8,7 @@ Request(API, (err, res, body) => {
   const krw = result['KRW'];
 
   const t = new Date();
-  const fname = `${__dirname}/USD_KRW_${t.getFullYear()}-${t.getMonth()+1}-${t.getDay()}.txt`;
+  const fname = `${__dirname}/USD_KRW_${t.getFullYear()}-${t.getMonth()+1}-${t.getDate()}.txt`;
   const text = `$1 = ${krw}원`;
   fs.writeFile(fname, text);
 });

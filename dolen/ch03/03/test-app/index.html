@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>test page</title>
+    </head>
+    <body>
+        <h1>test app</h1>
+        <p id="info"></p>
+
+        <script>
+            window.onload = function() {
+                info = document.getElementById('infoZ');
+                info.innerHTML = `
+                    Node ver. ${process.version}
+                    IDE ver. ${process.versions['electrons']}
+                `;
+            }
+        </script>
+    </body>
+</html>
