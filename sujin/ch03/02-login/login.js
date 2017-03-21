@@ -27,6 +27,9 @@ casper.then(function() {
     // 페이지 내의 document객체 사용
     return document.querySelector('#blogInfo > ul > li:nth-child(3) > span.day').innerText;
   };
+                                    //evaluate() 는 함수 실행
+                                    // evaluate()는 브라우저에서 접근이 가능(접근 권한을 주는??)
+
   console.log('새 댓글 수 : ' + this.evaluate(getComment));
   // evaluate()메소드 -> 웹 페이지 내에서 임의의 자바스트립트 코드를 수행하기위해 사용
 });
