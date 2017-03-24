@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="UTF-8">
+<title>IPC Test</title>
+<script>
+
+// 모듈 로드
+const {
+  ipcRenderer
+} = require('electron');
+
+window.onload = function () {
+  testASync();
+};
+
+function testSync() {
+  const res = ipc.sendSync(
+    'mul-sync',
+    {
+      a:30,
+      b:2
+    }
+  );
+  msg("sync result=" + res);
+}
+
+function testASync() {
+  ipcRenderer.send(
+    'mul-async',
+    {
+      a:30,
+      b:2
+    }
+  );
+  ipcRenderer.on('mul-async-reply', function(evt, arg) {
+    msg("async result=" + arg);
+  });
+}
+
+function msg(msg) {
+  document.getElementById('info').innerHTML += msg + "<br>";
+}
+</script>
+</head><body>
+  <h1>IPC TEST</h1>
+  <p id="info"></p>
+</body></html>
+

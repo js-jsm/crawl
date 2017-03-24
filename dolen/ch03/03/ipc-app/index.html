@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>test page</title>
+    </head>
+    <body>
+        <h1>test app</h1>
+        <p id="info"></p>
+
+        <script>
+            const electron = require('electron'),
+                  ipc = electron.ipcRenderer
+                  inpo = null;
+
+            function msg(str) {
+                const dom = document.createElement('div');
+                dom.innerHTML = str;
+
+                info.appendChild(dom);
+            }
+
+            function testSync() {
+                const res = ipc.sendSync('mul-sync', {
+                    a: 30,
+                    b: 2
+                });
+
+                msg(res);
+            }
+
+            function testAsync() {
+                ipc
+                .on('mul-async-reply', function(e, arg) {
+                    msg('async-result: ' + arg);
+                })
+                .send('mul-async', {
+                    a: 30,
+                    b: 2
+                });
+            }
+
+            window.onload = function() {
+                info = document.getElementById('info');
+                testSync();
+                testAsync();
+            }
+
+
+        </script>
+    </body>
+</html>
