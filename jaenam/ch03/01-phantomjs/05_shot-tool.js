@@ -7,23 +7,20 @@ if(args.length < 1) {
   casper.exit();
 }
 const url = args[0];
-const savepath = args[1] ? args[1] : 'screenshot.png';
+const savepath = args[1] || 'screenshot.png';
 
-casper.start();
-casper.viewport(1024, 768);
-
-casper.open(url);
-
-casper.then(function() {
-  this.capture(savepath, {
-    top: 0,
-    left: 0,
-    width: 1024,
-    height: 768
-  });
-});
-casper.then(function() {
-  casper.echo('DONE.');
-});
-
-casper.run();
+casper.start()
+  .viewport(1024, 768)
+  .open(url)
+  .then(function() {
+    casper.capture(savepath, {
+      top: 0,
+      left: 0,
+      width: 1024,
+      height: 768
+    });
+  })
+  .then(function() {
+    casper.echo('DONE.');
+  })
+  .run();
