@@ -1,0 +1,12 @@
+{
+  "title": "Fruits Database",
+  "vesrion": 2.13,
+  "items": [
+    {"name": "Tomato", "price": 300},
+    {"name": "Banana", "price": 170},
+    {"name": "Apple", "price": 210},
+    {"name": "Strawberry", "price": 520},
+    {"name": "Persimmon", "price": 490},
+    {"name": "Kiwi", "price": 320}
+  ]
+}
