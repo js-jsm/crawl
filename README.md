@@ -29,11 +29,11 @@ javascript와 node.js를 이용한 web crawling technic
 
 - Ch2-#. 재남
 - Ch3-1. 권성
-- Ch3-2. 유리
-- Ch4-1. 수진
-- Ch4-2. 희경
+- Ch3-2. 지혜
+- Ch4-1. 희경
+- Ch4-2. 수진
 - Ch4-3. 연종
-- Ch5-#. 태산 
+- Ch5-#. 태산
 - Ch6-1. 명기
 - Ch6-2. 은정
 - Ch7-1. 창규
@@ -43,7 +43,7 @@ javascript와 node.js를 이용한 web crawling technic
 - Ch8-2. 원준
 
 
-## 벌금 
+## 벌금
 
 #### 1. github에 안올리면 벌금 5,000원!
 

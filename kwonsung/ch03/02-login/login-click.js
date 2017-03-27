@@ -7,7 +7,7 @@ const id = facebook.id;
 const pw = facebook.pw;
 
 casper.start();
-// casper.userAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36');
+casper.userAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36');
 casper.open(url);
 
 casper.then(function(){
@@ -20,14 +20,17 @@ casper.then(function(){
 casper.then(function() {
   const path = '#notifications_jewel > a';
   if(casper.exists(path)) casper.mouseEvent('click', path);
+
 });
+
+casper.wait(5000);
 
 casper.then(function() {
   this.capture('facebook2.png', {
     top: 0,
     left: 0,
-    width: 320,
-    height: 640
+    width: 1500,
+    height: 1024
   });
 });
 
