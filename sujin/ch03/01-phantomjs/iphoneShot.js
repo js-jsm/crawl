@@ -21,3 +21,9 @@ casper.then(function(){
 });
 //실행
 casper.run();
+
+/*
+casper
+    .start()
+    .open()
+*/

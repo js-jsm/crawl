@@ -11,6 +11,7 @@ casper.start();
 casper.open('http://naver.com');
 
 // 스크린샷 수행
+
 casper.then(function() {
   casper.capture('screenshot2.png');
 });

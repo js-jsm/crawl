@@ -4,6 +4,7 @@ var casper = require('casper').create();
 var utils = require('utils');
 
 //인자 얻기
+// casper에 지정한 인자가 casper.cli.args에 배열 형식으로 들어간다.
 var args = casper.cli.args;
 if (args.length < 1) {
   //사용법 표시
