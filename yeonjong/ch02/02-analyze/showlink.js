@@ -9,10 +9,7 @@ client.fetch(url, param, function(err, $) {
     console.log('Error : ', err);
     return;
   }
-
-
   //jQuery each 함수
-
   $('a').each(function(idx) {
     var text = $(this).text();
     var href = $(this).attr('href');
