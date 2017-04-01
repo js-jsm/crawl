@@ -2,6 +2,7 @@
 
 //모듈 로드와 DB오픈
 var levelup = require('level');
+// levelup()로 데이터베이스 열기
 var db = levelup('./testdb');
 
 // 값 저장
@@ -27,7 +28,7 @@ function testGet() {
 
 // 일괄저장
 function testBatch() {
-  db.batch()
+  db.batch() //batch() => 
     .put('Mango', 'yellow')
     .put('Banana', 'yellow')
     .put('Kiwi', 'green')
