@@ -13,4 +13,4 @@ var txt = buf2.toString('utf-8'); // 버퍼를 문자열로 변환
 console.log(txt);
 
 // UTF-8으로 파일 저장
-fs.writeFileSync('test-convert.txt', txt, 'utf-8')
+fs.writeFileSync('test-convert.txt', txt, 'utf-8');

@@ -16,5 +16,5 @@ fs.writeFileSync(fname, buf, 'binary');
 var bin = fs.readFileSync(fname, 'binary');
 
 // EUC-KR의 바이너리를 UTF-8로 변환
-var txt = iconv.decode(bin, 'euc-kr');
+var txt = iconv.decode(buf, 'euc-kr');
 console.log(txt);
