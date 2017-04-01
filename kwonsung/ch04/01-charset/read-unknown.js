@@ -2,7 +2,7 @@ const fs = require('fs');
 const Iconv = require('iconv').Iconv;
 const jschardet = require('jschardet');
 
-const buf = fs.readFileSync('./sample3.txt');
+const buf = fs.readFileSync('./icnov-lite-test-euckr.txt');
 const det = jschardet.detect(buf);
 console.log(det);
 

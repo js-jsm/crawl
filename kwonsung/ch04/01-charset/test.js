@@ -1,8 +1,5 @@
-var http = require('http'),
-  iconv = require('iconv-lite');
-
-http.get("http://www.naver.com/", function(res) {
-  res.pipe(iconv.decodeStream('utf-8')).collect(function(err, decodedBody) {
-    console.log(decodedBody);
-  });
-});
+function setComma(str) {
+  str = String(str);
+  return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+}
+console.log(setComma(234234234));
