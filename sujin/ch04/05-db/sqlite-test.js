@@ -1,4 +1,5 @@
 //모듈 로드
+//modules-node모듈에서 require을 사용해 'cheerio-httpcli', 'fs', 'url'을 가지고와 각 지정한 변수에 저장한다.
 var sqlite3 = require('sqlite3').verbose();
 //로걸 db열기
 var db = new sqlite3.Database('test.sqlite');
@@ -7,6 +8,8 @@ var db = new sqlite3.Database('test.sqlite');
 db.serialize(function() {
   //SQL을 실행하여 테이블 생성
   // db.run() -> sql 실행
+  // CREATE TABLE IF NOT EXISTS -> 만약 또 CREATE를 실행하가면 TABLE이름이 같다고 에러가 날 것임 
+  //                               프로그램을 계속 실행 시키고 싶다면 CREATE TABLE IF NOT EXISTS 쓰면됨.
   db.run('CREATE TABLE IF NOT EXISTS items(name, value)');
 
   // PreparedStatement로 데이터 삽입
@@ -22,4 +25,5 @@ db.serialize(function() {
     console.log(row.name + ':' + row.value);
   });
 });
+//db닫기. --> db서버가 부담을 덜어 주기위해???..
 db.close();

@@ -1,19 +1,22 @@
 //제이펍 출판 도서 목록을 DB에 넣고 조회하기 for Node.js
 
 //경로 지정
+//            __dirname 현재 폴더에서 하위 경로로 저장.
 var DB_PATH = __dirname + '/jpub.sqlite';
 
 //모듈 로드
-var sqlite3 = require('sqlite3').verbose();
+//modules-node에서 require()을 사용해 'sqlite3'의 모듈을 가지고와 sqlite3 변수에 저장한다.
+var sqlite3 = require('sqlite3').verbose(); // verbose --> 다른 함수를 인자로 받는다.
 
 //데이터베이스 연결
 var db = new sqlite3.Database(DB_PATH);
 
-//변수 선언
+//변수 선언                                           //encodeURIComponent-> '제이펍의 도서' 라는 글자를 인코딩해라.
 var BASE_URL = 'http://jpub.tistory.com/category/' + encodeURIComponent('제이펍의 도서');
 var PAGE_NUM = 6; // PAGE 최대값
 
 // 모듈 선언
+//modules-node모듈에서 require을 사용해 'cheerio-httpcli', 'fs', 'url'을 가지고와 각 지정한 변수에 저장한다.
 var client  = require('cheerio-httpcli');
 var fs = require('fs');
 var urlType = require('url');
@@ -24,6 +27,7 @@ var booklist = [];
 scrape(1);
 
 function scrape(page) {
+  //
   if(page > PAGE_NUM) {
     dbinsert();
     return;

@@ -50,7 +50,7 @@ function scrape(page) {
     scrape(page+1);
   });
 }
-function dbinsert() {
+function dbinsert() { // 카-값을 조합해서 leveldb에 저장하고 있음
   var books = {};
   booklist.forEach(function(value, index, array) {
     var words = value.split(' '); //단어별로 분할

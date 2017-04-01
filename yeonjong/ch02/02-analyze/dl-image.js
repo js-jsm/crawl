@@ -5,7 +5,9 @@ var fs = require('fs');
 var urlType = require('url');
 
 //저장할 디렉터리가 없으면 생성
+//__dirname (현재 내위치)절대경로 리턴
 var savedir = __dirname + '/img';
+
 if(!fs.existsSync(savedir)) {
   fs.mkdirSync(savedir);
 }
