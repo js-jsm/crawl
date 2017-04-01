@@ -11,6 +11,10 @@ jaepil/**/*.json
 wonjun/**/img/
 wonjun/**/*.html
 wonjun/**/*.json
+wonjun/**/testdb/
+wonjun/**/leveldb-jPUB/
+wonjun/**/*.pdf
+wonjun/**/*.xlsx
 **/*.iml
 **/*.txt
 kwonsung/**/user.json
