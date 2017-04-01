@@ -2,7 +2,7 @@
 var fs = require('fs');
 
 //JSON 파일 읽기
-var json = fs.readFileSync('./test.json', 'utf-8');
+var json = fs.readFileSync("test.json", "utf-8");
 
 //JS 객체로 변환
 var obj = JSON.parse(json);
