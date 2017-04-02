@@ -49,4 +49,11 @@ for(var i = 0; i < data.length; i++) {
      .text(value, g_x + 5, y + 5);
   y += 20 + 5;
 }
+
+doc.polygon(
+  [150, 50],
+  [100,150],
+  [200,150]
+);
+doc.stroke();
 doc.end();
