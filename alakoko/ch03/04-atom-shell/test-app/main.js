@@ -11,7 +11,8 @@ app.on('ready', function(){
     height: 600
   });
   //지정 URL 로드
-  win.loadURL('file://' + __dirname + '/index.html'); //
+  console.log("__dirname : "+"["+__dirname+"]");
+  win.loadURL('file://' + __dirname + '/index.html');
   win.on('closed', function(){
     win = null;
   });
