@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>아싸 나 일렉트론 한다~~</title>
+
+<script>
+window.onload = function(){
+    var info = document.getElementById('info');
+    info.innerHTML =
+        "Node Version." + process.version + '<br>' +
+        "atom Version." + process.versions['electron'];
+}
+
+</script>
+
+</head>
+<body>
+    <h1>ipc app</h1>
+    <p id="info"></p>
+</body>
+</html>

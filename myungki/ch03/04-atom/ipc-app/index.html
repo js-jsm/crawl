@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>아싸 나 일렉트론 한다~~</title>
+
+<script>
+
+var
+    electron = require('electron'),
+    ipc = electron.ipcRenderer;
+
+var info = null;
+
+window.onload = function(){
+    info = document.getElementById('info');
+    testSync();
+    testAsync();
+};
+
+function testSync(){
+    let res = ipc.sendSync('mul-sync', {a: 30, b: 2});
+    msg("Sync result = " + res);
+}
+
+function testAsync() {
+    ipc.send('mul-async', {a: 30, b: 2});
+    ip.on('mul-async-reply', function(evt, arg){
+        msg('async result = ', arg);
+    });
+}
+
+function msg(msg) {
+    info.innerHTML = msg + '<br>';
+}
+
+</script>
+
+</head>
+<body>
+    <h1>test app</h1>
+    <p id="info"></p>
+</body>
+</html>
