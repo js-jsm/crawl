@@ -19,13 +19,13 @@ app.on('ready', () => {
         })
         .loadURL(TARGET_URL);
 
-    ipc.on('mul-sync', (e, arg) => {
-        console.log('arg', arg);
-        e.returnValue = arg.a * arg.b;
-    });
-
-    ipc.on('mul-async', (e, arg) => {
-        console.log('arg', arg);
-        e.sender.send('mul-async-reply', arg.a * arg.b);
-    });
+    ipc
+        .on('mul-sync mul-async', (e, arg) => {
+            console.log('arg', arg);
+            e.returnValue = arg.a * arg.b;
+        })
+       .on('mul-async', (e, arg) => {
+            console.log('arg', arg);
+            e.sender.send('mul-async-reply', arg.a * arg.b);
+        });
 });
