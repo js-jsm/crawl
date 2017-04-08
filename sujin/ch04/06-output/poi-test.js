@@ -35,7 +35,7 @@ for(var i = 0; i < list.length; i++) {
   c2.setCellValue(list[i][1]);
 
   var style = (i == 0) ? style_head: style_u;
-  c1.setCellStyle(style);
+  c1.setCellStyle(style);햣
   c2.setCellStyle(style);
 }
 //파일 쓰기

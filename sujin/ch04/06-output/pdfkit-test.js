@@ -1,6 +1,7 @@
 // PDFkit 사용 테스트 for Node.js
 
 //모듈 로드
+//modules-node에서 require()을 사용해 'pdfkit', 'fs '의 모듈을 가지고와 각 지정한 변수에 저장한다.
 var PDFDocument = require('pdfkit');
 var fs = require('fs');
 
@@ -8,6 +9,8 @@ var fs = require('fs');
 var doc = new PDFDocument();
 
 // 출력 파일 설정
+// pipe() => 연결 시키는 함수?
+
 doc.pipe(fs.createWriteStream('output.pdf'));
 
 //폰트 지정

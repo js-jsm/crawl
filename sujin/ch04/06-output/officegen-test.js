@@ -1,6 +1,9 @@
 // 엑셀 파일 생성 테스트 for Node.js
 
+// officegen은 엑셀이 설치 되지 않은 환경에서도 엑셀을 사용할 수 있게 만든 라이브러리 이다.
 //모듈 로드
+// modules-node에서 require함수로 fs, officegen을 가지고와 각 지정된 변수에 저장한다.
+// xlsx는 officegen함수 안에 있는 'xlsx'을 가지고와 저장한다.
 var fs        = require('fs');
 var officegen = require('officegen')
 var xlsx      = officegen('xlsx');
