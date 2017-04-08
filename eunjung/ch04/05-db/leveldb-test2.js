@@ -63,8 +63,8 @@ function testKeyValues() {
 function testSearch() {
   console.log('\nrange-search:');
   var opt = {
-    start : "fruits!",
-    end   : "fruits!\xFF"
+    start : "fruits!",  // 이것은 레거시코드. gte
+    end   : "fruits!\xFF"// lte 로 변경되었다.
   };
   db.createReadStream(opt)
     .on('data', function (data) {
