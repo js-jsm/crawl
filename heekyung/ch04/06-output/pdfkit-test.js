@@ -22,7 +22,7 @@ doc.fontSize(20)
 // 도형 그리기
 doc.save()
     .moveTo(80, 80)
-    .lineTo(255, 80)
+    .lineTo(250, 80)
     .lineTo(250, 150)
     .lineTo(80, 150)
     .lineTo(80, 80)
