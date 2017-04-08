@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "casper": "^0.1.1",
+    "officegen": "^0.4.4",
+    "pdfkit": "^0.8.0",
+    "request": "^2.81.0"
+  }
+}

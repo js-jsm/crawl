@@ -1,0 +1,28 @@
+title: "과일 데이터베이스"
+version: 2.13
+items: [
+    {
+        name: "tomato"
+        price: 300
+    }
+    {
+        name: "banana"
+        price: 200
+    }
+    {
+        name: "apple"
+        price: 120
+    }
+    {
+        name: "strawberry"
+        price: 20
+    }
+    {
+        name: "persimmon"
+        price: 2000
+    }
+    {
+        name: "kiwi"
+        price: 450
+    }
+]

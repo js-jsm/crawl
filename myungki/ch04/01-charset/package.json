@@ -1,0 +1,16 @@
+{
+  "name": "01-charset",
+  "version": "1.0.0",
+  "description": "",
+  "main": "fs-readwrite.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "iconv": "^2.2.1",
+    "iconv-lite": "^0.4.15",
+    "jschardet": "^1.4.2"
+  }
+}

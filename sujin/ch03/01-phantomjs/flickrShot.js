@@ -10,12 +10,17 @@ casper.start();
 casper.viewport(1400, 800);
 
 // UserAgent 설정
+// 디바이스 시스템이 무엇인지 알 수있음
+// 설정할 수 있는 범위가 있음
 casper.UserAgent('UserAgent : Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebkit/537.36(KHTML, like Gecko) chrome/37.0.2062/120 Safari/537.36');
 
 // 플리커 에서 고양이로 검색
 // 고양이에 대한 검색 결과를 요청해 text에 저장.
+//          한글과 같은 문자를 A code로 바꿔주는 것이 퍼센팅 인코딩 인데
+//         이것을 실행 시켜 주는 것이 encodeURIComponent()이다
 var text = encodeURIComponent('고양이');
-casper.open('http://www.flickr.com/search/?text=' + text);
+                                    // 자기가 입력한 text가 입력이 된다.
+casper.open('http://www.flickr.com/sear/ch/?text=' + text);
 
 // 화면 캡처
 casper.then(function() {
