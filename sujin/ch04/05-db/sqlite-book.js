@@ -76,7 +76,7 @@ function dbinsert() {
           ins_stmt.run(words[i]); //분할되 단어를 db에 삽입
         }
       });
-      ins_stmt.finalize();
+      ins_stmt.finalize(); //sql 보냄
 
       // 제목에 사용된 단어 통계
       console.log('집계 결과');

@@ -1,5 +1,5 @@
-2017/04/02-00:42:37.597 1970 Recovering log #6
-2017/04/02-00:42:37.597 1970 Level-0 table #8: started
-2017/04/02-00:42:37.597 1970 Level-0 table #8: 247 bytes OK
-2017/04/02-00:42:37.612 1970 Delete type=0 #6
-2017/04/02-00:42:37.612 1970 Delete type=3 #4
+2017/04/02-12:02:27.681 21fc Recovering log #9
+2017/04/02-12:02:27.681 21fc Level-0 table #11: started
+2017/04/02-12:02:27.697 21fc Level-0 table #11: 247 bytes OK
+2017/04/02-12:02:27.709 21fc Delete type=0 #9
+2017/04/02-12:02:27.709 21fc Delete type=3 #7

@@ -11,7 +11,7 @@ var client  = require('cheerio-httpcli');
 var fs      = require('fs');
 var urlType = require('url');
 
-// 출판 팩 목록 저장 변수
+// 출판 책 목록 저장 변수
 var booklist = [];
 
 scrape(1);

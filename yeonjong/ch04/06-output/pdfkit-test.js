@@ -17,7 +17,7 @@ doc.font('H2GTRE.TTF');
 doc.fontsize(30)
   .text('hello~!!', 90, 100);
 doc.fontsize(20)
-  .text('안녕하세여\ㅜn', 100, 180);
+  .text('안녕하세여\n', 100, 180);
 
 //도형그리기
 doc.save()

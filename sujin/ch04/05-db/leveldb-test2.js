@@ -8,7 +8,7 @@ var opt = {
 var db = levelup('./testdb2', opt);
 
 // 일괄로 값 저장 (-> 실제로 자바스크립트객체 저장중..)
-db.batch()
+db.batch() // 다중 한번에 저장을 할때 사용(저장안하고 대기)
   .put('fruits!apple', {
     name  : 'Apple',
     price : 300,
@@ -26,7 +26,7 @@ db.batch()
     price : 300,
     color : 'green'
   })
-  .write(testKeys);
+  .write(testKeys); // batch() 사용 하겠다
 
   //키 목록 획득
   function testKeys() {
@@ -56,10 +56,10 @@ db.batch()
   function testSearch() {
     console.log('\nrange-search : ');
     var opt = {
-      start: 'fruits!',
-      end: 'fruits!\xFF' // fruitsㅇ로 시작하는 단어 모두 검색
+      gte: 'fruits!', // start
+      lte: 'fruits!kiwi' // end fruitsㅇ로 시작하는 단어 모두 검색
     };
-    db.createReadStream(opt)
+    db.createReadStream(opt) //검색 옵션 
       .on('data', function (data) {
         console.log('+ key = ' + data.key);
       })

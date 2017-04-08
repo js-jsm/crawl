@@ -53,13 +53,13 @@ function scrape(page) {
 function dbinsert() { // 카-값을 조합해서 leveldb에 저장하고 있음
   var books = {};
   booklist.forEach(function(value, index, array) {
-    var words = value.split(' '); //단어별로 분할
+    var words = value.split(' '); //단어별로 분할 // trim() -> 모든 곱
 
     for (var i in words) {
       var word = words[i];
       var titles = books[word];
       if (titles == undefined) {
-        bookds[word] = [];
+        books[word] = [];
       }
       books[word].push(value);
     }

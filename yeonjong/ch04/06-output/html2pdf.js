@@ -2,7 +2,7 @@
 
 //제이펍 페이지
 var url = 'http://jpub.tistory.com/';
-var savepath = 'test.pdf';
+var savepath = './test.pdf';
 
 //CasperJS 오브젝트 생성
 var casper = require('casper').create();
