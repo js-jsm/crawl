@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+</head>
+<body>
+<h3>Chat client</h3>
+<div>
+  메시지:
+  <input id="msg" type="text" value="안녕하세요" size="40" />
+  <button id="talk_btn">전송</button>
+</div>
+<hr />
+<div id="log" style="margin: 24px"></div>
+<script>
+  {
+    const api = '/api?';
+    const talk_btn = document.getElementById('talk_btn');
+
+    const sendMsg = () => {
+      const domMsg = document.getElementById('msg');
+      const MSG = domMsg.value;
+      const URL = `${api}msg=${encodeURIComponent(MSG)}`;
+
+      fetch(URL, {
+        body: {
+          msg: MSG
+        }
+      }).then(res => res.json())
+      .then(data => {
+        domMsg.value = '';
+        domMsg.focus();
+        const e = data.msg;
+        console.log(data);
+
+        const p_you = document.createElement('p');
+        p_you.innerHTML = `사용자&gt; ${MSG}<hr />`;
+
+        const p_bot = document.createElement('p');
+        p_bot.innerHTML = `봇&gt; ${e}<hr />`;
+        p_bot.style.backgroundColor = '#e0f0ff';
+
+        const log = document.getElementById('log');
+        log.insertBefore(p_you, log.firstElementChild);
+        log.insertBefore(p_bot, p_you);
+      })
+    };
+
+    talk_btn.addEventListener('click', sendMsg);
+  }
+</script>
+</body>
+</html>

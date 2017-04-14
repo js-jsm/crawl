@@ -21,9 +21,9 @@ const parse = (text, callback) => {
   }
 
   res = res.replace(/\r/g, '');
-  res = res.replace(/\s+/g, '');
+  res = res.replace(/\s+$/g, '');
   const lines = res.split('\n');
-  res = lines.map(v => v.replace('\t', '').split(','));
+  res = lines.map(v => v.replace('\t', ',').split(','));
 
   callback(res);
 };
