@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h3>CHAT CLIENT</h3>
+    <div>
+        메시지:
+        <input type="text" id="msg" value="안녕하세요" size="40" />
+        <button id="talkBtn">전송</button>
+    </div>
+    <hr>
+    <div id="log" style="margin: 24px;"></div>
+
+    <script>
+    const $ = q => document.querySelector(q);
+
+    const $msg = $('#msg');
+    const $log = $('#log');
+
+    const $ajax = (url, callback) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.onreadystatechange = () => {
+            if(xhr.readyState === 4) {
+                if(xhr.status === 200) {
+                    callback(xhr, xhr.responseText);
+                }
+            }
+        };
+        xhr.send('');
+        return xhr;
+    };
+
+    $('#talkBtn').onclick = function() {
+        const msg = $msg.value;
+        const url = `/api?msg=${encodeURIComponent(msg)}`;
+
+        $ajax(url, function(xhr, txt) {
+            $msg.value = '';
+            $msg.focus();
+            const e = JSON.parse(txt);
+            const p_you = document.createElement('p');
+            p_you.innerHTML = `사용자 &gt; ${msg} <hr/>`;
+
+            const p_bot = document.createElement('p');
+            p_bot.innerHTML = `채팅봇 &gt; ${e['msg']} <hr/>`;
+            p_bot.style.backgroundColor = '#e0f0ff';
+
+            $log.insertBefore(p_you, log.firstChild);
+            $log.insertBefore(p_bot, p_you);
+        });
+    };
+    </script>
+</body>
+</html>
