@@ -1,11 +1,13 @@
 // mecab-kor를 Node.js에서 사용
+// mecab 형태소 분석기임
 
 // 모듈 로드
 var fs = require('fs');
-var execSync = require('child_process').execSync;
+var execSync = require('child_process').execSync; // execSync은 자식형태소 실행 시켜 주는것.
 
 // 형태소 분석할 텍스트
 var srcText = '찾아라. 그러면 발견할 것이다. \n';
+
 // parse() 형태소 분석 시작!
  parse(srcText, function() {
    for(int i in result) {

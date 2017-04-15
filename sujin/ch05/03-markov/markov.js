@@ -1,4 +1,6 @@
 // 마르코프 체인 으로 문장을 요약
+// markov =>
+
 var SENTENCE_CONT = 3;
 var Mecab = require('./mecab-mod.js');
 var mecab = new Mecab();
@@ -9,14 +11,14 @@ var text = fs.readFileSync('sample.txt', 'UTF-8');
 
 // 형태소 분석하여 문장 생성
 mecab.parse(text, function(items) {
-  var dic = makeDic(items);
+  var dic = makeDic(items); // list가 넘어오면
   console.log(dic);
   makeSentence(dic);
 });
 
 // 마르코프 체인을 위한 사전 작성
 function makeDic(items) {
-  var words = ['@'];
+  var words = ['@'];  // items이 넘어오면  '@' 을 저장 시킨다.
   var dic   = {};
   for (var i in items) {
     var item = items[i];

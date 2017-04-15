@@ -1,8 +1,10 @@
+// 외부 모듈 도입
+var execSync = require('child_process').execSync;
+var fs       = require('fs'); // module.exports 안에 있으면 exports가 실행 될때 마다 실행 되서 좋진않다.
+
 // MeCab 모듈
 module.exports = function () {
-  // 외부 모듈 도입
-  var execSync = require('child_process').execSync;
-  var fs       = require('fs');
+
 
   //형태소 분석 실행 함수
   this.parse = function (text, callback) {

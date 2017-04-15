@@ -29,7 +29,7 @@ whie(line = liner.next()) {
   lineno++;
 }
 
-//
+//                           형태소 분석한 배열들
 function checkSentence(line, items, lineno) {
   var cnt = 0; // 조사 '의' 가 출현 한 횟수
   var cur = []; // 현재 읽고 있는 문장

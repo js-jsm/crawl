@@ -18,9 +18,10 @@ mecab.parse(text, function() {
 });
 
 // 출현 빈도 조사
+// 위에 txt안에 있는 형태소 분석 한 것에 대한 배열을 checkWordCount매개 변수로 받는다
 function checkWordCount(items) {
   // 형태소를 객체에 넣어서 빈도를 조사
-  var words = {};
+  var words = {}; // 단어 받기
   for(var i in items) {
     var it items[i];
     var w = it[0];
