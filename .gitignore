@@ -18,3 +18,4 @@ wonjun/**/*.xlsx
 **/*.iml
 **/*.txt
 kwonsung/**/user.json
+config.json

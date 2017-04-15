@@ -25,8 +25,13 @@
     "xml2js": "^0.4.17"
   },
   "dependencies": {
+    "bayes": "^0.0.6",
+    "fb": "^1.1.1",
     "level": "^1.6.0",
+    "mongodb": "^2.2.25",
+    "n-readlines": "^0.2.7",
     "officegen": "^0.4.4",
-    "pdfkit": "^0.8.0"
+    "pdfkit": "^0.8.0",
+    "twit": "^2.2.5"
   }
 }
