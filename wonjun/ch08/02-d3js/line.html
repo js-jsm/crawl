@@ -1,0 +1,67 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>막대 그래프3</title>
+  <script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.js"
+  charset="utf-8"></script>
+  <style>
+  body { font-size: 10px; }
+  .axis path, .axis line {
+    fill: none;
+    stroke: black,
+    shape-rendering: crispEdges,
+  }
+  .line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+  }
+  </style>
+</head>
+<body>
+  <script>
+    const CSVFILE = './aaa.csv';
+    const parseDate = d3.time.format('%Y/%m/%d').parse;
+    const width = 600;
+    const height = 400;
+    const margin = { top:40, right: 20, bottom: 30, left: 20 };
+    const x = d3.time.scale().range([0, width]);
+    const y = d3.scale.linear().range([height, 0]);
+    // Axis 지정
+    const x_axis = d3.svg.axis()
+    .scale(x)
+    .orient('bottom')
+    .tickFormat(d => `${d.getMonth() + 1}월`);
+
+    const y_axis = d3.svg.axis().scale(y).orient('left').ticks(5);
+    // svg 태그 추가
+    const svg = d3.select('body')
+    .append('svg')
+    .attr('width', width + margin.left + margin.right)
+    .attr('height', height + margin.top + margin.bottom)
+    .append('g')
+    .attr('transform', `translate(${margin.left}, ${margin.top})`);
+
+    // 꺽은선 그래프 작성
+    const line = d3.svg.line().x(d => x(d.date)).y(d => y(d.value));
+
+    // 데이터 파일을 읽어드림
+    d3.csv(CSVFILE, function(err, data) {
+      err && new Error(err);
+      const newData = data.map(elm => ({ date: parseDate(elm.date), value: parseFloat(elm.value) }))
+      x.domain(d3.extent(newData, d => d.date));
+      y.domain([
+        d3.min(newData, d => parseFloat(d.value)),
+        d3.max(newData, d => parseFloat(d.value)),
+      ]);
+      //그래프 그림
+      svg.append('path').datum(newData).attr('class', 'line').attr('d', line);
+      // 눈금축 추가
+      svg.append('g').attr('class', 'y axis').call(y_axis);
+      svg.append('g').attr('class', 'x axis').attr('transform', `translate(0, ${height})`).call(x_axis);
+    })
+  </script>
+</body>
+</html>

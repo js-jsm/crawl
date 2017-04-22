@@ -1,0 +1,61 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>막대 그래프3</title>
+  <script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"
+  charset="utf-8"></script>
+</head>
+<body>
+  <script>
+    const dataset = [30, 25, 44, 21, 30, 50];
+    const width = 600;
+    const height = 400;
+    const margin = { top:40, right: 20, bottom: 30, left: 20 };
+    const bar_h = parseInt((height / dataset.length), 10);
+    const bar_w = parseInt((width / 50), 10);
+    // 스케일 자동 계산
+    const x_scale = d3.scale.linear().domain([0, d3.max(dataset)]).range([0, width]);
+
+    // Axis 지정
+    const x_axis = d3.svg.axis().scale(x_scale).orient('top');
+
+    // 그릴 영역 생성
+    const svg = d3.select('body')
+    .append('svg')
+    .attr('width', width + margin.left + margin.right)
+    .attr('height', height + margin.top + margin.bottom);
+
+    // 그래프 그림
+    const bar = svg.selectAll('.bar').data(dataset).enter();
+
+    // 막대 부분 생성
+    bar.append('rect')
+    .attr({
+      x: margin.left,
+      width: (d, i) => x_scale(d),
+      y: (d, i) => margin.top + i * bar_h,
+      height: (d, i) => bar_h - 4,
+      fill: (d, i) => (i % 2)  ? 'red' : 'blue',
+    });
+
+    // 레이블 텍스트(막대 수치 ) 부분 생성
+    bar.append('text')
+    .text(d => d)
+    .style({ 'font-size': '20px', 'text-anchor': 'middle'})
+    .attr({
+      x: (d, i) => x_scale(d) - 10,
+      y: (d, i) => margin.top + i * bar_h + bar_h / 2 + 5,
+      fill: 'white',
+    });
+
+    // Axis 추가
+    svg.append('g')
+    .attr('class', 'axis')
+    .attr('transform', `translate(${margin.left}, ${margin.top})`)
+    .style({ 'font-size': '15px' })
+    .call(x_axis);
+  </script>
+</body>
+</html>

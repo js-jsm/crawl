@@ -1,0 +1,42 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>원 그래프</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      google.charts.load('visualization', '1.0', {'packages':['corechart']});
+
+      google.charts.setOnLoadCallback(() => {
+        const data = new google.visualization.DataTable();
+        data.addColumn('string', '인물');
+        data.addColumn('number', '득표');
+        data.addRows([
+          ['송중기', 3],
+          ['강동원', 1],
+          ['유아인', 1],
+          ['김수현', 1],
+          ['이민호', 2]
+        ]);
+
+        const options = {
+          'title':'인기투표',
+          'width':600,
+          'height':400,
+          pieSliceText: 'value',
+          legend: {
+            position: 'right',
+            textStyle: { color: 'blue', fontSize: 16 },
+          },
+        };
+
+        const chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+      });
+    </script>
+</head>
+<body>
+  <div id="chart_div"></div>
+</body>
+</html>

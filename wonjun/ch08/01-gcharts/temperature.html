@@ -1,0 +1,33 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>선 그래프</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="temperature-data.js"></script>
+    <script type="text/javascript">
+
+      google.charts.load('visualization', '1.0', {'packages':['corechart']});
+
+      google.charts.setOnLoadCallback(() => {
+        const data = new google.visualization.arrayToDataTable(tempData);
+
+
+        const options = {
+          'title':'최고기온, 최저기온',
+          'width':600,
+          'height':400,
+          colors: ['red', 'blue'],
+          pointShape: 'circle',
+          pointSize: 5,
+        };
+
+        const chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+      });
+    </script>
+</head>
+<body>
+  <div id="chart_div"></div>
+</body>
+</html>
