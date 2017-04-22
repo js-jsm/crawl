@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "bayes": "0.0.6",
     "cheerio": "^0.22.0",
     "cheerio-httpcli": "^0.6.11",
     "comma-separated-values": "^3.6.4",
