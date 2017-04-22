@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    body {
+        font-size: 10px;
+    }
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: black;
+        shape-rendering: crispEdges;
+    }
+    .line {
+        fill: none;
+        stroke: steelblue;
+        stroke-width: 1.5px;
+    }
+    </style>
+</head>
+<body>
+    <script src="d3.min.js"></script>
+    <script>
+    const csvFile = './weather.csv';
+    const parseDate = d3.time.format('%Y/%m/%d').parse;
+
+    console.log(parseDate);
+
+
+    const WIDTH = 600;
+    const HEIGHT = 400;
+    const margin = {top: 40, right: 20, bottom: 50, left: 20};
+
+    const x = d3.time.scale().range([0, WIDTH]);
+    const y = d3.scale.linear().range([HEIGHT, 0]);
+
+    const xAxis = d3.svg.axis()
+        .scale(x)
+        .orient('bottom')
+        .tickFormat(d => `${d.getMonth()+1}월`);
+    const yAxis = d3.svg.axis().scale(y).orient('left').ticks(5);
+
+    console.log(xAxis, yAxis);
+
+
+    const svg = d3.select('body')
+        .append('svg')
+        .attr({
+            width: WIDTH + margin.left + margin.right,
+            height: HEIGHT + margin.top + margin.bottom
+        })
+        .append('g')
+        .attr('transform', `translate(${margin.left}, ${margin.top})`);
+
+    const line = d3.svg.line()
+        .x(d => x(d.date))
+        .y(d => y(d.value));
+
+    d3.csv(csvFile, (err, data) => {
+        if(err) {
+            alert('데이터 읽기 에러');
+            return;
+        }
+        data.forEach(d => {
+            d.date = parseDate(d.date);
+            d.value = parseFloat(d.value);
+        });
+        console.log(data);
+
+        x.domain(d3.extent(data, d => d.date));
+        y.domain([
+            d3.min(data, d => d.value),
+            d3.max(data, d => d.value)
+        ]);
+
+        svg.append('path')
+            .datum(data)
+            .attr({
+                class: 'line',
+                'd': line
+            });
+
+        svg.append('g')
+            .attr('class', 'y axis')
+            .call(yAxis);
+
+        svg.append('g')
+            .attr({
+                class: 'x axis',
+                transform: `translate(0, ${HEIGHT})`
+            })
+            .call(xAxis);
+    });
+    </script>
+</body>
+</html>

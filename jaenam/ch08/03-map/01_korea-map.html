@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .boundary {
+            fill: none;
+            stroke: black;
+            stroke-dasharray: 2, 2;
+            stroke-linejoin: round;
+        }
+
+        .place-label {
+            font-size: 9px;
+            fill: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="d3.v3.min.js"></script>
+    <script src="topojson.v0.min.js"></script>
+    <script>
+        const WIDTH = 1024;
+        const HEIGHT = 1024;
+
+        const svg = d3.select('body')
+            .append('svg')
+            .attr({
+                width: WIDTH,
+                height: HEIGHT
+            });
+
+        d3.json('korea-topo.json', (err, map) => {
+            const geo = map.objects['korea-geo'];
+            const mapObj = topojson.object(map, geo);
+
+            const projection = d3.geo.mercator()
+                .center([137, 35])
+                .scale(2000)
+                .translate([WIDTH / 2, HEIGHT / 2]);
+
+            const path = d3.geo.path()
+                .projection(projection);
+
+            svg.append('path')
+                .datum(mapObj)
+                .attr('d', path);
+
+            svg.selectAll('path')
+                .attr('fill', 'green');
+
+            const mesh = topojson.mesh(
+                map, geo,
+                (a, b) => a !== b
+            );
+            svg.append('path')
+                .datum(mesh)
+                .attr({
+                    d: path,
+                    class: 'boundary'
+                });
+
+            svg.selectAll('.place-label')
+                .data(mapObj.geometries)
+                .enter()
+                .append('text')
+                .attr({
+                    class: () => 'place-label',
+                    transform: d => `translate(${path.centroid(d)})`
+                })
+                .text(d => {
+                    const s = d.properties.name_local;
+                    if(!s) return;
+                    if(s === '서울특별시') return s;
+                    return;
+                });
+        });
+    </script>
+</body>
+
+</html>

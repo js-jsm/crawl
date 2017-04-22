@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="chartDiv"></div>
+
+    <script src="temperature-data.js"></script>
+    <script src="https://www.google.com/jsapi"></script>
+    <script>
+    const drawChart = () => {
+        const data = new google.visualization.arrayToDataTable(tempData);
+        const chart = new google.visualization.LineChart(
+            document.getElementById('chartDiv')
+        );
+        chart.draw(data, {
+            title: '최저기온과 최저기온',
+            width: 600,
+            height: 400,
+            colors: ['red', 'blue'],
+            pointShape: 'circle',
+            pointSize: 5
+        });
+    }
+    google.load('visualization', '1.0', {
+        packages: ['corechart']
+    });
+    google.setOnLoadCallback(drawChart);
+    </script>
+</body>
+</html>

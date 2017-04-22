@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="lib/nvd3/nv.d3.css" rel="stylesheet" type="text/css">
+    <style>
+    #chart text {
+        font-size: 20px;
+    }
+    </style>
+</head>
+<body>
+    <div id="chart"><svg></svg></div>
+
+    <script src="lib/d3.min.js"></script>
+    <script src="lib/nvd3/nv.d3.js"></script>
+    <script>
+    var sample_data = [
+        { label: "강동원", value: 94 },
+        { label: "송중기", value: 88 },
+        { label: "김수현", value: 62 },
+        { label: "김우빈", value: 48 },
+        { label: "유아인", value: 45 },
+        { label: "이민호", value: 22 }
+    ];
+
+    nv.addGraph(() => {
+        const chart = nv.models.pieChart()
+            .x(d => `${d.label}(${d.value})`)
+            .y(d => d.value)
+            .title('인기투표')
+            .showLabels(true)
+            .donutLabelsOutside(true)
+            .padAngle(0.04)
+            .cornerRadius(8)
+            .donut(true);
+
+        d3.select('#chart svg')
+            .style({
+                width: '800px',
+                height: '600px'
+            })
+            .datum(sample_data)
+            .transition().duration(1000)
+            .call(chart);
+
+        d3.select('#chart .nv-pie-title')
+            .style({
+                fontSize: '50px'
+            });
+        return chart;
+    });
+    </script>
+</body>
+
+</html>
