@@ -18,3 +18,5 @@ wonjun/**/*.xlsx
 **/*.txt
 kwonsung/**/user.json
 config.json
+myungki/**/mecab-0.996-ko-0.9.2/
+myungki/**/mecab-ko-dic-2.0.1-20150920/
